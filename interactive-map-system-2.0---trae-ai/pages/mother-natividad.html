@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mother Natividad Building</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+        .floor-heading {
+            grid-column: 1/-1;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            font-weight: 800;
+            border-radius: 8px;
+            box-shadow: none;
+            padding: 0.6rem 1.2rem 0.6rem 1.5rem;
+            letter-spacing: 0.01em;
+            display: block;
+            width: 100%;
+        }
+    .floor-4 { color: #b71c1c; background: #fff4f4; border-left: 8px solid #b71c1c; }
+    .floor-2 { color: #f9a825; background: #fffbe7; border-left: 8px solid #f9a825; }
+    .floor-ground { color: #6d4c41; background: #f8f4f1; border-left: 8px solid #6d4c41; }
+    body {
+            background: #f8f9fa;
+            margin: 0;
+            font-family: 'Poppins', 'Inter', Arial, sans-serif;
+            color: #222;
+        }
+        .building-header {
+            background: #fff;
+            padding: 2.5rem 0 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-bottom: 1.5px solid #eee;
+            text-align: center;
+        }
+        .building-header h1 {
+            color: #b71c1c;
+            font-size: 2.3rem;
+            font-weight: 800;
+            margin: 0 0 0.5rem 0;
+            letter-spacing: 0.01em;
+        }
+        .building-header h3 {
+            color: #444;
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin: 0 0 1.2rem 0;
+        }
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: #888;
+            margin: 0 0 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+        .breadcrumbs a {
+            color: #b71c1c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+        .breadcrumbs a:hover {
+            color: #d32f2f;
+            text-decoration: underline;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            border: 2px solid #b71c1c;
+            color: #b71c1c;
+            background: #fff;
+            border-radius: 6px;
+            padding: 0.4rem 1.1rem 0.4rem 0.8rem;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 1.2rem 0 0 1.5rem;
+            transition: background 0.15s, color 0.15s, border 0.15s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        }
+        .back-btn:hover {
+            background: #b71c1c;
+            color: #fff;
+            border-color: #b71c1c;
+        }
+        .back-btn svg {
+            margin-right: 0.5rem;
+            width: 1.1em;
+            height: 1.1em;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+            padding: 2.5rem 2rem 3rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .room-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: box-shadow 0.18s, transform 0.18s;
+            min-height: 320px;
+            position: relative;
+        }
+        .room-card:hover {
+            box-shadow: 0 6px 24px rgba(183,28,28,0.13);
+            transform: scale(1.025);
+            z-index: 2;
+        }
+        .room-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #b71c1c;
+            margin-bottom: 0.3rem;
+            margin-top: 0;
+        }
+        .room-type {
+            font-size: 1.05rem;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 0.7rem;
+        }
+        .room-thumb {
+            width: 100%;
+            max-width: 260px;
+            border-radius: 8px;
+            margin-bottom: 1.1rem;
+            object-fit: cover;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+            align-self: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .start-tour-btn {
+            margin-top: auto;
+            background: #b71c1c;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 0.7rem 1.4rem;
+            font-size: 1.08rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 1px 6px rgba(183,28,28,0.08);
+            transition: background 0.15s, box-shadow 0.15s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .start-tour-btn:hover {
+            background: #d32f2f;
+            box-shadow: 0 4px 16px rgba(183,28,28,0.13);
+        }
+        @media (max-width: 700px) {
+            .room-grid {
+                grid-template-columns: 1fr;
+                padding: 1.2rem 0.5rem 2rem 0.5rem;
+            }
+            .back-btn, .breadcrumbs {
+                padding-left: 0.5rem;
+                margin-left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="building-header">
+        <a href="../index.html" class="back-btn">
+            <svg viewBox="0 0 20 20"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+            Back to Map
+        </a>
+        <h1>Mother Natividad Building</h1>
+        <h3>This building contains lecture halls, offices, and labs.</h3>
+        <nav class="breadcrumbs">
+            <a href="../index.html">Map</a> &gt; <span>Mother Natividad</span>
+        </nav>
+    </div>
+    <main>
+        <section class="room-grid">
+
+
+            <h2 class="floor-heading floor-2" style="margin-top: 0;">2nd Floor</h2>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=MNB+201" alt="Preview of MNB 201" />
+                <h2 class="room-title">MNB 201</h2>
+                <div class="room-type">Classroom</div>
+                <a href="../360-viewer.html?room=Room 201" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=MNB+202" alt="Preview of MNB 202" />
+                <h2 class="room-title">MNB 202</h2>
+                <div class="room-type">Classroom</div>
+                <a href="../360-viewer.html?room=Room 202" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=MNB+203" alt="Preview of MNB 203" />
+                <h2 class="room-title">MNB 203</h2>
+                <div class="room-type">Classroom</div>
+                <a href="../360-viewer.html?room=Room 203" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=MNB+204" alt="Preview of MNB 204" />
+                <h2 class="room-title">MNB 204</h2>
+                <div class="room-type">Classroom</div>
+                <a href="../360-viewer.html?room=Room 204" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <h2 class="floor-heading floor-ground">1st Floor</h2>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Playground" alt="Preview of Playground" />
+                <h2 class="room-title">Playground</h2>
+                <div class="room-type">Playground</div>
+                <a href="../360-viewer.html?room=Playground" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Faculty+Room" alt="Preview of Faculty Room" />
+                <h2 class="room-title">Faculty Room</h2>
+                <div class="room-type">Faculty Room</div>
+                <a href="../360-viewer.html?room=Faculty Room" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Computer+Laboratory+Kinder" alt="Preview of Computer Laboratory - Kinder" />
+                <h2 class="room-title">Computer Laboratory - Kinder</h2>
+                <div class="room-type">Computer Lab</div>
+                <a href="../360-viewer.html?room=Computer Laboratory - Kinder" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Room+101" alt="Preview of Room 101" />
+                <h2 class="room-title">Room 101</h2>
+                <div class="room-type">Classroom</div>
+                <a href="../360-viewer.html?room=Room 101" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Room+102" alt="Preview of Room 102" />
+                <h2 class="room-title">Room 102</h2>
+                <div class="room-type">Classroom</div>
+                <a href="../360-viewer.html?room=Room 102" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Mother+Francisca+Outreach+Center" alt="Preview of Mother Francisca Outreach Center" />
+                <h2 class="room-title">Mother Francisca Outreach Center</h2>
+                <div class="room-type">Outreach Center</div>
+                <a href="../360-viewer.html?room=Mother Francisca Outreach Center" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Sewing+Center" alt="Preview of Sewing Center" />
+                <h2 class="room-title">Sewing Center</h2>
+                <div class="room-type">Sewing Center</div>
+                <a href="../360-viewer.html?room=Sewing Center" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Play+Room" alt="Preview of Play Room" />
+                <h2 class="room-title">Play Room</h2>
+                <div class="room-type">Play Room</div>
+                <a href="../360-viewer.html?room=Play Room" class="start-tour-btn">Start Tour</a>
+            </div>
+
+            <div class="room-card">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Casa+Sebastiana" alt="Preview of Casa Sebastiana" />
+                <h2 class="room-title">Casa Sebastiana</h2>
+                <div class="room-type">Casa Sebastiana</div>
+                <a href="../360-viewer.html?room=Casa Sebastiana" class="start-tour-btn">Start Tour</a>
+            </div>
+
+        </section>
+        <div style="display: flex; justify-content: center; margin: 2.5rem 0 3.5rem 0;">
+            <a href="../index.html" class="back-btn" style="font-size: 1.15rem; padding: 0.7rem 2.2rem;">
+                <svg viewBox="0 0 20 20" style="margin-right: 0.7rem; width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor;"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+                Back to Map
+            </a>
+        </div>
+    </main>
+    <script>
+        // Scroll to hash on page load
+        const hash = window.location.hash.replace("#", "");
+        if (hash) {
+            const target = document.getElementById(hash);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                target.style.boxShadow = "0 0 0 4px #ffd600";
+            }
+        }
+    </script>
+</body>
+</html>
+

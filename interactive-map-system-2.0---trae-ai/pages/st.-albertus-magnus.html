@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>St. Albertus Magnus Building</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .floor-heading {
+      grid-column: 1/-1;
+      margin-top: 2.5rem;
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+      font-weight: 800;
+      border-radius: 8px;
+      box-shadow: none;
+      padding: 0.6rem 1.2rem 0.6rem 1.5rem;
+      letter-spacing: 0.01em;
+      display: block;
+      width: 100%;
+    }
+    .floor-5 { color: #b71c1c; background: #fff4f4; border-left: 8px solid #b71c1c; }
+    .floor-4 { color: #1565c0; background: #f0f6ff; border-left: 8px solid #1565c0; }
+    .floor-3 { color: #388e3c; background: #f3fbf4; border-left: 8px solid #388e3c; }
+    .floor-2 { color: #f9a825; background: #fffbe7; border-left: 8px solid #f9a825; }
+    .floor-ground { color: #6d4c41; background: #f8f4f1; border-left: 8px solid #6d4c41; }
+    .floor-basement { color: #512da8; background: #f3f0fa; border-left: 8px solid #512da8; }
+    body {
+      background: #f8f9fa;
+      margin: 0;
+      font-family: 'Poppins', 'Inter', Arial, sans-serif;
+      color: #222;
+    }
+    .building-header {
+      background: #fff;
+      padding: 2.5rem 0 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-bottom: 1.5px solid #eee;
+      text-align: center;
+    }
+    .building-header h1 {
+      color: #b71c1c;
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: 0.01em;
+    }
+    .building-header h3 {
+      color: #444;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin: 0 0 1.2rem 0;
+    }
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: #888;
+      margin: 0 0 1.5rem 0;
+      padding-left: 1.5rem;
+    }
+    .breadcrumbs a {
+      color: #b71c1c;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .breadcrumbs a:hover {
+      color: #d32f2f;
+      text-decoration: underline;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      border: 2px solid #b71c1c;
+      color: #b71c1c;
+      background: #fff;
+      border-radius: 6px;
+      padding: 0.4rem 1.1rem 0.4rem 0.8rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 1.2rem 0 0 1.5rem;
+      transition: background 0.15s, color 0.15s, border 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .back-btn:hover {
+      background: #b71c1c;
+      color: #fff;
+      border-color: #b71c1c;
+    }
+    .back-btn svg {
+      margin-right: 0.5rem;
+      width: 1.1em;
+      height: 1.1em;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      padding: 2.5rem 2rem 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .room-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.18s, transform 0.18s;
+      min-height: 320px;
+      position: relative;
+    }
+    .room-card:hover {
+      box-shadow: 0 6px 24px rgba(183,28,28,0.13);
+      transform: scale(1.025);
+      z-index: 2;
+    }
+    .room-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #b71c1c;
+      margin-bottom: 0.3rem;
+      margin-top: 0;
+    }
+    .room-type {
+      font-size: 1.05rem;
+      color: #555;
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+    .room-thumb {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 8px;
+      margin-bottom: 1.1rem;
+      object-fit: cover;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      align-self: center;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .start-tour-btn {
+      margin-top: auto;
+      background: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.7rem 1.4rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 1px 6px rgba(183,28,28,0.08);
+      transition: background 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .start-tour-btn:hover {
+      background: #d32f2f;
+      box-shadow: 0 4px 16px rgba(183,28,28,0.13);
+    }
+    @media (max-width: 700px) {
+      .room-grid {
+        grid-template-columns: 1fr;
+        padding: 1.2rem 0.5rem 2rem 0.5rem;
+      }
+      .back-btn, .breadcrumbs {
+        padding-left: 0.5rem;
+        margin-left: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="building-header">
+    <a href="../index.html" class="back-btn">
+      <svg viewBox="0 0 20 20"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+      Back to Map
+    </a>
+    <h1>St. Albertus Magnus Building</h1>
+    <h3>This building contains lecture halls, offices, and labs.</h3>
+    <nav class="breadcrumbs">
+      <a href="../index.html">Map</a> &gt; <span>Albertus Magnus</span>
+    </nav>
+  </div>
+  <main>
+    <section class="room-grid">
+
+  <h2 class="floor-heading floor-5" style="margin-top: 0;">5th Floor</h2>
+
+      <div class="room-card" id="CEITFacultyRoom">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/ceit faculty room.jpg" alt="Preview of CEIT Faculty Room" />
+        <h2 class="room-title">CEIT Faculty Room</h2>
+        <div class="room-type">Faculty Room</div>
+        <a href="../360-viewer.html?room=CEIT Faculty Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="CEITChairperson">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/ceit chairperson room.jpg" alt="Preview of CEIT Chairperson" />
+        <h2 class="room-title">CEIT Chairperson</h2>
+        <div class="room-type">Chairperson Office</div>
+        <a href="../360-viewer.html?room=CEIT Chairperson Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="MikrotikAcademy">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/mikrotik academy.jpg" alt="Preview of Mikrotik Academy" />
+        <h2 class="room-title">Mikrotik Academy</h2>
+        <div class="room-type">Mikrotik</div>
+        <a href="../360-viewer.html?room=Mikrotik Academy" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="CEITEquipmentRoom">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/electronic & circuits laboratory.jpg" alt="Preview of CEIT Equipment Room" />
+        <h2 class="room-title">CEIT Equipment Room</h2>
+        <div class="room-type">Equipment Room</div>
+        <a href="../360-viewer.html?room=CEIT Equipment Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <!-- New cards added below -->
+      <div class="room-card" id="ElectronicCircuitsLab">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/electronic & circuits laboratory.jpg" alt="Electronic & Circuits Laboratory" />
+        <h2 class="room-title">Electronic & Circuits Laboratory</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Electronic and Circuits Laboratory" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="CEITLectureRoom">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/ceit lecture room.jpg" alt="CEIT Lecture Room" />
+        <h2 class="room-title">CEIT Lecture Room</h2>
+        <div class="room-type">Lecture Room</div>
+        <a href="../360-viewer.html?room=ALM101" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="DrawingLaboratory">
+        <img class="room-thumb" src="../assets/360-images/albertus edited/drawing laboratory.jpg" alt="Drawing Laboratory" />
+        <h2 class="room-title">Drawing Laboratory</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Drawing Laboratory" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="MacLab">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Mac+Laboratory" alt="Preview of Mac Laboratory" />
+        <h2 class="room-title">Mac Laboratory</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Mac Laboratory" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="CEITComputerLab">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CEIT+Computer+Laboratory" alt="Preview of CEIT Computer Laboratory" />
+        <h2 class="room-title">CEIT Computer Laboratory</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=CEIT Computer Laboratory" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="StorageRoom">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Storage+Room" alt="Preview of Storage Room" />
+        <h2 class="room-title">Storage Room</h2>
+        <div class="room-type">Storage</div>
+        <a href="../360-viewer.html?room=Storage Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+  <h2 class="floor-heading floor-4">4th Floor</h2>
+
+        <!-- 4th Floor Cards -->
+        <div class="room-card" id="CBAFacultyRoom">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CBA+Faculty+Room" alt="Preview of CBA Faculty Room" />
+          <h2 class="room-title">CBA Faculty Room</h2>
+          <div class="room-type">Faculty Room</div>
+          <a href="../360-viewer.html?room=CBA Faculty Room" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="CBAChairperson">
+          <img class="room-thumb" src="../assets/360-images/albertus edited/cba chairperson.jpg" alt="Preview of CBA Chairperson" />
+          <h2 class="room-title">CBA Chairperson</h2>
+          <div class="room-type">Chairperson Office</div>
+          <a href="../360-viewer.html?room=CBA Chairperson Room" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="CBARoom401">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CBA+Room+401" alt="Preview of CBA Room 401" />
+          <h2 class="room-title">CBA Room 401</h2>
+          <div class="room-type">ALM 401</div>
+          <a href="../360-viewer.html?room=CBA Room 401" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="CBARoom402">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CBA+Room+402" alt="Preview of CBA Room 402" />
+          <h2 class="room-title">CBA Room 402</h2>
+          <div class="room-type">ALM 402</div>
+          <a href="../360-viewer.html?room=CBA Room 402" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="CBARoom403">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CBA+Room+403" alt="Preview of CBA Room 403" />
+          <h2 class="room-title">CBA Room 403</h2>
+          <div class="room-type">ALM 403</div>
+          <a href="../360-viewer.html?room=CBA Room 403" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="CBARoom404">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CBA+Room+404" alt="Preview of CBA Room 404" />
+          <h2 class="room-title">CBA Room 404</h2>
+          <div class="room-type">ALM 404</div>
+          <a href="../360-viewer.html?room=CBA Room 404" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="CBARoom405">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CBA+Room+405" alt="Preview of CBA Room 405" />
+          <h2 class="room-title">CBA Room 405</h2>
+          <div class="room-type">ALM 405</div>
+          <a href="../360-viewer.html?room=CBA Room 405" class="start-tour-btn">Start Tour</a>
+        </div>
+
+        <div class="room-card" id="BusinessStimulationOffice">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Business+Stimulation+Office" alt="Preview of Business Stimulation Office" />
+          <h2 class="room-title">Business Stimulation Office</h2>
+          <div class="room-type">Office</div>
+          <a href="../360-viewer.html?room=Business Stimulation Office" class="start-tour-btn">Start Tour</a>
+        </div>
+
+  <h2 class="floor-heading floor-3">3rd Floor</h2>
+
+      <!-- 3rd Floor Cards -->
+      <div class="room-card" id="ConferenceRoom">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Conference+Room" alt="Preview of Conference Room" />
+        <h2 class="room-title">Conference Room</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=Conference Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="LearningResourceCenter">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Learning+Resource+Center" alt="Preview of Learning Resource Center" />
+        <h2 class="room-title">Learning Resource Center</h2>
+        <div class="room-type">Resource Center</div>
+        <a href="../360-viewer.html?room=Learning Resource Center" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="ComputerLab3rdFloor">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Computer+Laboratory" alt="Preview of Computer Laboratory" />
+        <h2 class="room-title">Computer Laboratory</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Computer Laboratory" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="PrefectStudentFormation">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Prefect+of+Student+Formation+%26+Activities" alt="Preview of Prefect of Student Formation & Activities" />
+        <h2 class="room-title">Prefect of Student Formation & Activities</h2>
+        <div class="room-type">Office</div>
+        <a href="../360-viewer.html?room=Prefect of Student Formation & Activities" class="start-tour-btn">Start Tour</a>
+      </div>
+
+  <h2 class="floor-heading floor-2">2nd Floor</h2>
+
+      <!-- 2nd Floor Cards -->
+      <div class="room-card" id="CONFacultyRoom">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CON+Faculty+Room" alt="Preview of CON Faculty Room" />
+        <h2 class="room-title">CON Faculty Room</h2>
+        <div class="room-type">Faculty Room</div>
+        <a href="../360-viewer.html?room=CON Faculty Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="DeanCollegeNursing">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Dean+of+College+of+Nursing" alt="Preview of Dean of College of Nursing" />
+        <h2 class="room-title">Dean of College of Nursing</h2>
+        <div class="room-type">Dean's Office</div>
+        <a href="../360-viewer.html?room=Dean of College of Nursing" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="NursingLab1">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Nursing+Laboratory+1" alt="Preview of Nursing Laboratory 1" />
+        <h2 class="room-title">Nursing Laboratory 1</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Nursing Laboratory 1" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="NursingArtsLab1">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Nursing+Arts+Lab+1" alt="Preview of Nursing Arts Lab 1" />
+        <h2 class="room-title">Nursing Arts Lab 1</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Nursing Arts Lab 1" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="NursingLab2">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Nursing+Laboratory+2" alt="Preview of Nursing Laboratory 2" />
+        <h2 class="room-title">Nursing Laboratory 2</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Nursing Laboratory 2" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="NursingArtsLab2">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Nursing+Arts+Lab+2" alt="Preview of Nursing Arts Lab 2" />
+        <h2 class="room-title">Nursing Arts Lab 2</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Nursing Arts Lab 2" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="AnatomyRoom">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Anatomy+Room" alt="Preview of Anatomy Room" />
+        <h2 class="room-title">Anatomy Room</h2>
+        <div class="room-type">Laboratory</div>
+        <a href="../360-viewer.html?room=Anatomy Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="StudentAffairsActivities">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Student+Affairs+%26+Activities" alt="Preview of Student Affairs & Activities" />
+        <h2 class="room-title">Student Affairs & Activities</h2>
+        <div class="room-type">Office</div>
+        <a href="../360-viewer.html?room=Student Affairs & Activities" class="start-tour-btn">Start Tour</a>
+      </div>
+
+  <h2 class="floor-heading floor-ground">1st Floor</h2>
+      <!-- 1st Floor Cards -->
+      <div class="room-card" id="COEFacultyRoom">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=COE+Faculty+Room" alt="Preview of COE Faculty Room" />
+        <h2 class="room-title">COE Faculty Room</h2>
+        <div class="room-type">Faculty Room</div>
+        <a href="../360-viewer.html?room=COE Faculty Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="COEChairperson">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=COE+Chairperson" alt="Preview of COE Chairperson" />
+        <h2 class="room-title">COE Chairperson</h2>
+        <div class="room-type">Chairperson Office</div>
+        <a href="../360-viewer.html?room=COE Chairperson" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="MicroTeachingLab">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Micro-Teaching+Laboratory" alt="Preview of Micro-Teaching Laboratory" />
+        <h2 class="room-title">Micro-Teaching Laboratory</h2>
+        <div class="room-type">ALM 101</div>
+        <a href="../360-viewer.html?room=Micro-Teaching Laboratory" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="COERoom102">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=COE+Room+102" alt="Preview of COE Room 102" />
+        <h2 class="room-title">COE Room 102</h2>
+        <div class="room-type">ALM 102</div>
+        <a href="../360-viewer.html?room=COE Room 102" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="COERoom103">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=COE+Room+103" alt="Preview of COE Room 103" />
+        <h2 class="room-title">COE Room 103</h2>
+        <div class="room-type">ALM 103</div>
+        <a href="../360-viewer.html?room=COE Room 103" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="COERoom104">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=COE+Room+104" alt="Preview of COE Room 104" />
+        <h2 class="room-title">COE Room 104</h2>
+        <div class="room-type">ALM 104</div>
+        <a href="../360-viewer.html?room=COE Room 104" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="COERoom105">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=COE+Room+105" alt="Preview of COE Room 105" />
+        <h2 class="room-title">COE Room 105</h2>
+        <div class="room-type">ALM 105</div>
+        <a href="../360-viewer.html?room=COE Room 105" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="FlambeauPublications">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Flambeau+Publications" alt="Preview of Flambeau Publications" />
+        <h2 class="room-title">Flambeau Publications</h2>
+        <div class="room-type">Publications</div>
+        <a href="../360-viewer.html?room=Flambeau Publications" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="ElectricalRoom">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Electrical+Room" alt="Preview of Electrical Room" />
+        <h2 class="room-title">Electrical Room</h2>
+        <div class="room-type">Electrical Room</div>
+        <a href="../360-viewer.html?room=Electrical Room" class="start-tour-btn">Start Tour</a>
+      </div>
+
+      <div class="room-card" id="StAlbertusMagnusCanteen">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=St.+Albertus+Magnus+Canteen" alt="Preview of St. Albertus Magnus Canteen" />
+        <h2 class="room-title">St. Albertus Magnus Canteen</h2>
+        <div class="room-type">Canteen</div>
+        <a href="../360-viewer.html?room=St. Albertus Magnus Canteen" class="start-tour-btn">Start Tour</a>
+      </div>
+    </section>
+    <div style="display: flex; justify-content: center; margin: 2.5rem 0 3.5rem 0;">
+      <a href="../index.html" class="back-btn" style="font-size: 1.15rem; padding: 0.7rem 2.2rem;">
+        <svg viewBox="0 0 20 20" style="margin-right: 0.7rem; width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor;"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+        Back to Map
+      </a>
+    </div>
+  </main>
+  <script>
+    // Scroll to hash on page load
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.style.boxShadow = "0 0 0 4px #ffd600";
+      }
+    }
+  </script>
+</body>
+</html>

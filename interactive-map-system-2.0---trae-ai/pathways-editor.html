@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Pathways Editor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .top-controls {
+            background-color: #fff;
+            border-bottom: 1px solid #ddd;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .controls-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+        }
+        .container {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+        .editor-panel {
+            width: 300px;
+            background-color: #fff;
+            border-right: 1px solid #ddd;
+            padding: 15px;
+            overflow-y: auto;
+            height: calc(100vh - 80px);
+        }
+        #zoom-wrapper {
+            overflow: auto;
+            width: 100%;
+            height: calc(100vh - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        #map-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 100%;
+            margin: 1rem auto;
+            overflow: visible;
+            transform-origin: center center;
+            transition: transform 0.2s ease-out;
+        }
+        #background-map {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        #editor-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+            pointer-events: all;
+        }
+        .toolbar {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+        }
+        .tool-button {
+            padding: 8px 16px;
+            background-color: #8e0101;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 80px;
+        }
+        .tool-button:hover {
+            background-color: #6e0101;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .tool-button.active {
+            background-color: #6e0101;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3) inset;
+            transform: translateY(1px);
+        }
+        .tool-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(142, 1, 1, 0.3);
+        }
+        .panel-section {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h3 {
+            margin: 0 0 15px 0;
+            color: #8e0101;
+            font-size: 1.1em;
+        }
+        .top-controls h3 {
+            margin: 0;
+            white-space: nowrap;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #8e0101;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(142, 1, 1, 0.1);
+        }
+        .node-list, .path-list {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            background: #fff;
+        }
+        .list-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .list-item:hover {
+            background-color: #f8f8f8;
+        }
+        .list-item.selected {
+            background-color: #f0f0f0;
+            border-left: 3px solid #8e0101;
+        }
+        .status-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #333;
+            color: white;
+            padding: 8px 20px;
+            font-size: 13px;
+            z-index: 1000;
+        }
+        .connection-list {
+            margin-top: 15px;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: #fff;
+        }
+        .connection-item {
+            padding: 8px 12px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+        }
+        .connection-item:last-child {
+            border-bottom: none;
+        }
+        .remove-btn {
+            color: #8e0101;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        .remove-btn:hover {
+            background-color: #fff0f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-controls">
+        <div class="controls-row">
+            <h3>Campus Pathways Editor</h3>
+            <div class="button-group">
+                <button id="load-json" class="tool-button">Load JSON</button>
+                <button id="save-json" class="tool-button">Save JSON</button>
+                <button id="clear-all" class="tool-button">Clear All</button>
+            </div>
+            <div class="button-group">
+                <button id="add-node-btn" class="tool-button">Add Node</button>
+                <button id="add-path-btn" class="tool-button">Add Path</button>
+                <button id="select-btn" class="tool-button active">Select</button>
+                <button id="delete-btn" class="tool-button">Delete</button>
+            </div>
+            <div class="button-group">
+                <button id="zoom-in-btn" class="tool-button">Zoom In</button>
+                <button id="zoom-out-btn" class="tool-button">Zoom Out</button>
+                <button id="zoom-reset-btn" class="tool-button">Reset Zoom</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="editor-panel">
+            
+            <div class="panel-section">
+                <h3>Node Properties</h3>
+                <div id="node-properties" style="display: none;">
+                    <label for="node-id">ID:</label>
+                    <input type="text" id="node-id">
+                    
+                    <label for="node-name">Name:</label>
+                    <input type="text" id="node-name">
+                    
+                    <label for="node-type">Type:</label>
+                    <select id="node-type">
+                        <option value="building">Building</option>
+                        <option value="gate">Gate</option>
+                        <option value="junction">Junction</option>
+                        <option value="path">Path Node</option>
+                    </select>
+                    
+                    <label>Position:</label>
+                    <div style="display: flex; gap: 10px;">
+                        <div style="flex: 1;">
+                            <label for="node-x">X (%):</label>
+                            <input type="number" id="node-x" min="0" max="100" step="0.1">
+                        </div>
+                        <div style="flex: 1;">
+                            <label for="node-y">Y (%):</label>
+                            <input type="number" id="node-y" min="0" max="100" step="0.1">
+                        </div>
+                    </div>
+                    
+                    <label>Connections:</label>
+                    <div id="node-connections" class="connection-list"></div>
+                    
+                    <button id="update-node-btn" class="tool-button">Update Node</button>
+                </div>
+                <div id="no-node-selected" style="display: block;">
+                    <p>No node selected. Click on a node or add a new one.</p>
+                </div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>Path Properties</h3>
+                <div id="path-properties" style="display: none;">
+                    <label for="path-id">ID:</label>
+                    <input type="text" id="path-id">
+                    
+                    <label for="path-start">Start Node:</label>
+                    <select id="path-start"></select>
+                    
+                    <label for="path-end">End Node:</label>
+                    <select id="path-end"></select>
+                    
+                    <label for="path-distance">Distance:</label>
+                    <input type="number" id="path-distance" min="0" step="1">
+                    
+                    <label for="path-walkable">Walkable:</label>
+                    <select id="path-walkable">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                    
+                    <button id="update-path-btn" class="tool-button">Update Path</button>
+                </div>
+                <div id="no-path-selected" style="display: block;">
+                    <p>No path selected. Click on a path or add a new one.</p>
+                </div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>Nodes</h3>
+                <div id="node-list" class="node-list"></div>
+            </div>
+            
+            <div class="panel-section">
+                <h3>Paths</h3>
+                <div id="path-list" class="path-list"></div>
+            </div>
+        </div>
+        
+        <div id="zoom-wrapper">
+            <div id="map-container" class="canvas-container">
+                <img id="background-map" src="assets/map outline 7.png" alt="Campus Map">
+                <canvas id="editor-canvas" class="map-overlay"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="status-bar">
+        <span id="status-text">Ready</span>
+        <span id="coordinates" style="float: right;"></span>
+    </div>
+
+    <input type="file" id="json-file-input" style="display: none;">
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Canvas setup
+            const canvas = document.getElementById('editor-canvas');
+            const ctx = canvas.getContext('2d');
+            const canvasContainer = document.querySelector('.canvas-container');
+            const backgroundMap = document.getElementById('background-map');
+            
+            // UI elements
+            const statusText = document.getElementById('status-text');
+            const coordinatesDisplay = document.getElementById('coordinates');
+            const nodePropertiesPanel = document.getElementById('node-properties');
+            const noNodeSelectedPanel = document.getElementById('no-node-selected');
+            const pathPropertiesPanel = document.getElementById('path-properties');
+            const noPathSelectedPanel = document.getElementById('no-path-selected');
+            
+            // Tool buttons
+            const addNodeBtn = document.getElementById('add-node-btn');
+            const addPathBtn = document.getElementById('add-path-btn');
+            const selectBtn = document.getElementById('select-btn');
+            const deleteBtn = document.getElementById('delete-btn');
+            const loadJsonBtn = document.getElementById('load-json');
+            const saveJsonBtn = document.getElementById('save-json');
+            const clearAllBtn = document.getElementById('clear-all');
+            const jsonFileInput = document.getElementById('json-file-input');
+            
+            // Node properties inputs
+            const nodeIdInput = document.getElementById('node-id');
+            const nodeNameInput = document.getElementById('node-name');
+            const nodeTypeSelect = document.getElementById('node-type');
+            const nodeXInput = document.getElementById('node-x');
+            const nodeYInput = document.getElementById('node-y');
+            const nodeConnectionsDiv = document.getElementById('node-connections');
+            const updateNodeBtn = document.getElementById('update-node-btn');
+            
+            // Path properties inputs
+            const pathIdInput = document.getElementById('path-id');
+            const pathStartSelect = document.getElementById('path-start');
+            const pathEndSelect = document.getElementById('path-end');
+            const pathDistanceInput = document.getElementById('path-distance');
+            const pathWalkableSelect = document.getElementById('path-walkable');
+            const updatePathBtn = document.getElementById('update-path-btn');
+            
+            // Lists
+            const nodeListDiv = document.getElementById('node-list');
+            const pathListDiv = document.getElementById('path-list');
+            
+            // Data
+            let nodes = [];
+            let paths = [];
+            let selectedNode = null;
+            let selectedPath = null;
+            let currentTool = 'select';
+            let pathStartNode = null;
+            let currentZoom = 1;
+            const ZOOM_STEP = 0.1;
+            const MAX_ZOOM = 3;
+            const MIN_ZOOM = 0.5;
+            
+            // Constants
+            const NODE_RADIUS = 8;
+            const SELECTED_NODE_RADIUS = 10;
+            const NODE_COLORS = {
+                'building': '#0066cc',
+                'gate': '#cc6600',
+                'junction': '#009933',
+                'path': '#9900cc'
+            };
+            
+            // Resize canvas to match container
+            function resizeCanvas() {
+                canvas.width = canvasContainer.offsetWidth;
+                canvas.height = canvasContainer.offsetHeight;
+                render();
+            }
+            
+            // Initialize
+            function init() {
+                resizeCanvas();
+                window.addEventListener('resize', resizeCanvas);
+                setupEventListeners();
+                setupZoomControls();
+                render();
+                updateUI();
+            }
+
+            function setupZoomControls() {
+                document.getElementById('zoom-in-btn').addEventListener('click', () => {
+                    if (currentZoom < MAX_ZOOM) {
+                        currentZoom = Math.min(currentZoom + ZOOM_STEP, MAX_ZOOM);
+                        updateZoom();
+                    }
+                });
+
+                document.getElementById('zoom-out-btn').addEventListener('click', () => {
+                    if (currentZoom > MIN_ZOOM) {
+                        currentZoom = Math.max(currentZoom - ZOOM_STEP, MIN_ZOOM);
+                        updateZoom();
+                    }
+                });
+
+                document.getElementById('zoom-reset-btn').addEventListener('click', () => {
+                    currentZoom = 1;
+                    updateZoom();
+                });
+
+                canvas.addEventListener('wheel', (e) => {
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        const delta = e.deltaY > 0 ? -ZOOM_STEP : ZOOM_STEP;
+                        const newZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, currentZoom + delta));
+                        if (newZoom !== currentZoom) {
+                            currentZoom = newZoom;
+                            updateZoom();
+                        }
+                    }
+                }, { passive: false });
+            }
+
+            function updateZoom() {
+                const mapContainer = document.getElementById('map-container');
+                mapContainer.style.transform = `scale(${currentZoom})`;
+                render();
+            }
+            
+            // Setup event listeners
+            function setupEventListeners() {
+                // Tool buttons
+                addNodeBtn.addEventListener('click', () => setTool('add-node'));
+                addPathBtn.addEventListener('click', () => setTool('add-path'));
+                selectBtn.addEventListener('click', () => setTool('select'));
+                deleteBtn.addEventListener('click', () => setTool('delete'));
+                
+                // Canvas events
+                canvas.addEventListener('click', handleCanvasClick);
+                canvas.addEventListener('mousemove', handleCanvasMouseMove);
+                
+                // Node properties
+                updateNodeBtn.addEventListener('click', updateSelectedNode);
+                
+                // Path properties
+                updatePathBtn.addEventListener('click', updateSelectedPath);
+                
+                // JSON import/export
+                loadJsonBtn.addEventListener('click', () => jsonFileInput.click());
+                jsonFileInput.addEventListener('change', loadJsonFile);
+                saveJsonBtn.addEventListener('click', saveJsonFile);
+                clearAllBtn.addEventListener('click', clearAll);
+            }
+            
+            // Set current tool
+            function setTool(tool) {
+                currentTool = tool;
+                
+                // Update UI
+                addNodeBtn.classList.toggle('active', tool === 'add-node');
+                addPathBtn.classList.toggle('active', tool === 'add-path');
+                selectBtn.classList.toggle('active', tool === 'select');
+                deleteBtn.classList.toggle('active', tool === 'delete');
+                
+                // Reset path creation state
+                if (tool !== 'add-path') {
+                    pathStartNode = null;
+                }
+                
+                // Update cursor and status
+                switch(tool) {
+                    case 'add-node':
+                        canvas.style.cursor = 'crosshair';
+                        statusText.textContent = 'Click on the map to add a node';
+                        break;
+                    case 'add-path':
+                        canvas.style.cursor = 'crosshair';
+                        statusText.textContent = 'Click on a start node, then an end node to create a path';
+                        break;
+                    case 'select':
+                        canvas.style.cursor = 'pointer';
+                        statusText.textContent = 'Click on a node or path to select it';
+                        break;
+                    case 'delete':
+                        canvas.style.cursor = 'not-allowed';
+                        statusText.textContent = 'Click on a node or path to delete it';
+                        break;
+                }
+            }
+            
+            // Handle canvas click
+            function handleCanvasClick(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                
+                // Adjust for zoom level
+                const x = (e.clientX - rect.left) * scaleX / currentZoom / canvas.width * 100;
+                const y = (e.clientY - rect.top) * scaleY / currentZoom / canvas.height * 100;
+                
+                switch(currentTool) {
+                    case 'add-node':
+                        addNode(x, y);
+                        break;
+                    case 'add-path':
+                        handlePathCreation(x, y);
+                        break;
+                    case 'select':
+                        selectNodeOrPath(x, y);
+                        break;
+                    case 'delete':
+                        deleteNodeOrPath(x, y);
+                        break;
+                }
+            }
+            
+            // Handle mouse move on canvas
+            function handleCanvasMouseMove(e) {
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                
+                // Adjust for zoom level
+                const x = (e.clientX - rect.left) * scaleX / currentZoom / canvas.width * 100;
+                const y = (e.clientY - rect.top) * scaleY / currentZoom / canvas.height * 100;
+                
+                coordinatesDisplay.textContent = `X: ${x.toFixed(1)}%, Y: ${y.toFixed(1)}%`;
+            }
+            
+            // Add a new node
+            function addNode(x, y) {
+                const id = generateNodeId();
+                const newNode = {
+                    id,
+                    x,
+                    y,
+                    name: `Node ${id}`,
+                    type: 'junction',
+                    connections: []
+                };
+                
+                nodes.push(newNode);
+                selectedNode = newNode;
+                selectedPath = null;
+                
+                updateUI();
+                render();
+                
+                statusText.textContent = `Node ${id} added`;
+            }
+            
+            // Handle path creation
+            function handlePathCreation(x, y) {
+                const clickedNode = findNodeAt(x, y);
+                
+                if (!clickedNode) {
+                    statusText.textContent = 'No node at this position. Click on a node.';
+                    return;
+                }
+                
+                if (!pathStartNode) {
+                    // First node selection
+                    pathStartNode = clickedNode;
+                    statusText.textContent = `Start node ${pathStartNode.id} selected. Now click on an end node.`;
+                } else {
+                    // Second node selection - create path
+                    if (pathStartNode.id === clickedNode.id) {
+                        statusText.textContent = 'Cannot create path to the same node. Select a different end node.';
+                        return;
+                    }
+                    
+                    // Check if path already exists
+                    const existingPath = paths.find(p => 
+                        (p.start === pathStartNode.id && p.end === clickedNode.id) || 
+                        (p.start === clickedNode.id && p.end === pathStartNode.id)
+                    );
+                    
+                    if (existingPath) {
+                        statusText.textContent = `Path between these nodes already exists (${existingPath.id})`;
+                        pathStartNode = null;
+                        return;
+                    }
+                    
+                    // Calculate distance
+                    const distance = calculateDistance(pathStartNode, clickedNode);
+                    
+                    // Create new path
+                    const id = generatePathId();
+                    const newPath = {
+                        id,
+                        start: pathStartNode.id,
+                        end: clickedNode.id,
+                        distance,
+                        walkable: true
+                    };
+                    
+                    paths.push(newPath);
+                    
+                    // Update node connections
+                    pathStartNode.connections.push(newPath.id);
+                    clickedNode.connections.push(newPath.id);
+                    
+                    // Reset and update
+                    pathStartNode = null;
+                    selectedPath = newPath;
+                    selectedNode = null;
+                    
+                    statusText.textContent = `Path ${id} created`;
+                    updateUI();
+                    render();
+                }
+            }
+            
+            // Select a node or path
+            function selectNodeOrPath(x, y) {
+                // First try to select a node
+                const node = findNodeAt(x, y);
+                if (node) {
+                    selectedNode = node;
+                    selectedPath = null;
+                    statusText.textContent = `Node ${node.id} selected`;
+                    updateUI();
+                    render();
+                    return;
+                }
+                
+                // Then try to select a path
+                const path = findPathAt(x, y);
+                if (path) {
+                    selectedPath = path;
+                    selectedNode = null;
+                    statusText.textContent = `Path ${path.id} selected`;
+                    updateUI();
+                    render();
+                    return;
+                }
+                
+                // Nothing selected
+                selectedNode = null;
+                selectedPath = null;
+                statusText.textContent = 'No node or path at this position';
+                updateUI();
+                render();
+            }
+            
+            // Delete a node or path
+            function deleteNodeOrPath(x, y) {
+                // First try to delete a node
+                const nodeIndex = nodes.findIndex(n => isPointInNode(x, y, n));
+                if (nodeIndex !== -1) {
+                    const nodeToDelete = nodes[nodeIndex];
+                    
+                    // Delete all paths connected to this node
+                    const pathsToDelete = paths.filter(p => 
+                        p.start === nodeToDelete.id || p.end === nodeToDelete.id
+                    );
+                    
+                    pathsToDelete.forEach(path => {
+                        // Remove path from connections of other nodes
+                        const otherNodeId = path.start === nodeToDelete.id ? path.end : path.start;
+                        const otherNode = nodes.find(n => n.id === otherNodeId);
+                        if (otherNode) {
+                            otherNode.connections = otherNode.connections.filter(c => c !== path.id);
+                        }
+                        
+                        // Remove path
+                        const pathIndex = paths.findIndex(p => p.id === path.id);
+                        if (pathIndex !== -1) {
+                            paths.splice(pathIndex, 1);
+                        }
+                    });
+                    
+                    // Remove the node
+                    nodes.splice(nodeIndex, 1);
+                    
+                    if (selectedNode && selectedNode.id === nodeToDelete.id) {
+                        selectedNode = null;
+                    }
+                    
+                    statusText.textContent = `Node ${nodeToDelete.id} and its paths deleted`;
+                    updateUI();
+                    render();
+                    return;
+                }
+                
+                // Then try to delete a path
+                const path = findPathAt(x, y);
+                if (path) {
+                    // Remove path from connections of nodes
+                    const startNode = nodes.find(n => n.id === path.start);
+                    const endNode = nodes.find(n => n.id === path.end);
+                    
+                    if (startNode) {
+                        startNode.connections = startNode.connections.filter(c => c !== path.id);
+                    }
+                    
+                    if (endNode) {
+                        endNode.connections = endNode.connections.filter(c => c !== path.id);
+                    }
+                    
+                    // Remove path
+                    const pathIndex = paths.findIndex(p => p.id === path.id);
+                    if (pathIndex !== -1) {
+                        paths.splice(pathIndex, 1);
+                    }
+                    
+                    if (selectedPath && selectedPath.id === path.id) {
+                        selectedPath = null;
+                    }
+                    
+                    statusText.textContent = `Path ${path.id} deleted`;
+                    updateUI();
+                    render();
+                    return;
+                }
+                
+                statusText.textContent = 'No node or path at this position';
+            }
+            
+            // Update the selected node with form values
+            function updateSelectedNode() {
+                if (!selectedNode) return;
+                
+                const oldId = selectedNode.id;
+                const newId = nodeIdInput.value.trim();
+                
+                // Check if ID is unique
+                if (newId !== oldId && nodes.some(n => n.id === newId)) {
+                    alert(`Node ID "${newId}" already exists. Please choose a different ID.`);
+                    return;
+                }
+                
+                // Update node properties
+                selectedNode.id = newId;
+                selectedNode.name = nodeNameInput.value.trim();
+                selectedNode.type = nodeTypeSelect.value;
+                selectedNode.x = parseFloat(nodeXInput.value);
+                selectedNode.y = parseFloat(nodeYInput.value);
+                
+                // Update path references if ID changed
+                if (newId !== oldId) {
+                    paths.forEach(path => {
+                        if (path.start === oldId) path.start = newId;
+                        if (path.end === oldId) path.end = newId;
+                    });
+                }
+                
+                statusText.textContent = `Node ${newId} updated`;
+                updateUI();
+                render();
+            }
+            
+            // Update the selected path with form values
+            function updateSelectedPath() {
+                if (!selectedPath) return;
+                
+                const oldId = selectedPath.id;
+                const newId = pathIdInput.value.trim();
+                
+                // Check if ID is unique
+                if (newId !== oldId && paths.some(p => p.id === newId)) {
+                    alert(`Path ID "${newId}" already exists. Please choose a different ID.`);
+                    return;
+                }
+                
+                // Get old start and end nodes to update connections
+                const oldStartNode = nodes.find(n => n.id === selectedPath.start);
+                const oldEndNode = nodes.find(n => n.id === selectedPath.end);
+                
+                // Remove old path ID from connections
+                if (oldStartNode) {
+                    oldStartNode.connections = oldStartNode.connections.filter(c => c !== oldId);
+                }
+                if (oldEndNode) {
+                    oldEndNode.connections = oldEndNode.connections.filter(c => c !== oldId);
+                }
+                
+                // Update path properties
+                selectedPath.id = newId;
+                selectedPath.start = pathStartSelect.value;
+                selectedPath.end = pathEndSelect.value;
+                selectedPath.distance = parseInt(pathDistanceInput.value);
+                selectedPath.walkable = pathWalkableSelect.value === 'true';
+                
+                // Add new path ID to connections
+                const newStartNode = nodes.find(n => n.id === selectedPath.start);
+                const newEndNode = nodes.find(n => n.id === selectedPath.end);
+                
+                if (newStartNode && !newStartNode.connections.includes(newId)) {
+                    newStartNode.connections.push(newId);
+                }
+                if (newEndNode && !newEndNode.connections.includes(newId)) {
+                    newEndNode.connections.push(newId);
+                }
+                
+                statusText.textContent = `Path ${newId} updated`;
+                updateUI();
+                render();
+            }
+            
+            // Load JSON file
+            function loadJsonFile(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (data.nodes && data.paths) {
+                            nodes = data.nodes;
+                            paths = data.paths;
+                            selectedNode = null;
+                            selectedPath = null;
+                            statusText.textContent = 'JSON data loaded successfully';
+                            updateUI();
+                            render();
+                        } else {
+                            throw new Error('Invalid JSON structure');
+                        }
+                    } catch (error) {
+                        alert('Error loading JSON: ' + error.message);
+                    }
+                };
+                reader.readAsText(file);
+                
+                // Reset file input
+                jsonFileInput.value = '';
+            }
+            
+            // Save JSON file
+            function saveJsonFile() {
+                const data = {
+                    nodes: nodes,
+                    paths: paths
+                };
+                
+                const json = JSON.stringify(data, null, 2);
+                const blob = new Blob([json], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'pathways.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                statusText.textContent = 'JSON data saved';
+            }
+            
+            // Clear all data
+            function clearAll() {
+                if (confirm('Are you sure you want to clear all nodes and paths?')) {
+                    nodes = [];
+                    paths = [];
+                    selectedNode = null;
+                    selectedPath = null;
+                    statusText.textContent = 'All data cleared';
+                    updateUI();
+                    render();
+                }
+            }
+            
+            // Update UI based on selection
+            function updateUI() {
+                // Update node properties panel
+                if (selectedNode) {
+                    nodePropertiesPanel.style.display = 'block';
+                    noNodeSelectedPanel.style.display = 'none';
+                    
+                    nodeIdInput.value = selectedNode.id;
+                    nodeNameInput.value = selectedNode.name || '';
+                    nodeTypeSelect.value = selectedNode.type || 'junction';
+                    nodeXInput.value = selectedNode.x.toFixed(1);
+                    nodeYInput.value = selectedNode.y.toFixed(1);
+                    
+                    // Update connections list
+                    nodeConnectionsDiv.innerHTML = '';
+                    if (selectedNode.connections && selectedNode.connections.length > 0) {
+                        selectedNode.connections.forEach(connId => {
+                            const path = paths.find(p => p.id === connId);
+                            if (path) {
+                                const otherNodeId = path.start === selectedNode.id ? path.end : path.start;
+                                const otherNode = nodes.find(n => n.id === otherNodeId);
+                                const otherNodeName = otherNode ? otherNode.name : 'Unknown';
+                                
+                                const connItem = document.createElement('div');
+                                connItem.className = 'connection-item';
+                                connItem.innerHTML = `
+                                    <span>${otherNodeName} (${otherNodeId})</span>
+                                    <span class="remove-btn" data-path-id="${path.id}">×</span>
+                                `;
+                                nodeConnectionsDiv.appendChild(connItem);
+                                
+                                // Add remove connection handler
+                                connItem.querySelector('.remove-btn').addEventListener('click', function() {
+                                    const pathId = this.getAttribute('data-path-id');
+                                    deletePathById(pathId);
+                                });
+                            }
+                        });
+                    } else {
+                        nodeConnectionsDiv.innerHTML = '<div style="padding: 5px;">No connections</div>';
+                    }
+                } else {
+                    nodePropertiesPanel.style.display = 'none';
+                    noNodeSelectedPanel.style.display = 'block';
+                }
+                
+                // Update path properties panel
+                if (selectedPath) {
+                    pathPropertiesPanel.style.display = 'block';
+                    noPathSelectedPanel.style.display = 'none';
+                    
+                    pathIdInput.value = selectedPath.id;
+                    pathDistanceInput.value = selectedPath.distance;
+                    pathWalkableSelect.value = selectedPath.walkable.toString();
+                    
+                    // Update node selects
+                    updateNodeSelects();
+                    pathStartSelect.value = selectedPath.start;
+                    pathEndSelect.value = selectedPath.end;
+                } else {
+                    pathPropertiesPanel.style.display = 'none';
+                    noPathSelectedPanel.style.display = 'block';
+                }
+                
+                // Update node list
+                nodeListDiv.innerHTML = '';
+                nodes.forEach(node => {
+                    const item = document.createElement('div');
+                    item.className = 'list-item';
+                    if (selectedNode && selectedNode.id === node.id) {
+                        item.classList.add('selected');
+                    }
+                    item.textContent = `${node.name} (${node.id})`;
+                    item.addEventListener('click', () => {
+                        selectedNode = node;
+                        selectedPath = null;
+                        updateUI();
+                        render();
+                    });
+                    nodeListDiv.appendChild(item);
+                });
+                
+                // Update path list
+                pathListDiv.innerHTML = '';
+                paths.forEach(path => {
+                    const startNode = nodes.find(n => n.id === path.start);
+                    const endNode = nodes.find(n => n.id === path.end);
+                    
+                    const item = document.createElement('div');
+                    item.className = 'list-item';
+                    if (selectedPath && selectedPath.id === path.id) {
+                        item.classList.add('selected');
+                    }
+                    item.textContent = `${path.id}: ${startNode ? startNode.name : path.start} → ${endNode ? endNode.name : path.end}`;
+                    item.addEventListener('click', () => {
+                        selectedPath = path;
+                        selectedNode = null;
+                        updateUI();
+                        render();
+                    });
+                    pathListDiv.appendChild(item);
+                });
+                
+                // Update node selects for path properties
+                updateNodeSelects();
+            }
+            
+            // Update node selects in path properties
+            function updateNodeSelects() {
+                pathStartSelect.innerHTML = '';
+                pathEndSelect.innerHTML = '';
+                
+                nodes.forEach(node => {
+                    const startOption = document.createElement('option');
+                    startOption.value = node.id;
+                    startOption.textContent = `${node.name} (${node.id})`;
+                    pathStartSelect.appendChild(startOption);
+                    
+                    const endOption = document.createElement('option');
+                    endOption.value = node.id;
+                    endOption.textContent = `${node.name} (${node.id})`;
+                    pathEndSelect.appendChild(endOption);
+                });
+            }
+            
+            // Render the canvas
+            function render() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Draw paths
+                paths.forEach(path => {
+                    const startNode = nodes.find(n => n.id === path.start);
+                    const endNode = nodes.find(n => n.id === path.end);
+                    
+                    if (startNode && endNode) {
+                        const startX = startNode.x / 100 * canvas.width;
+                        const startY = startNode.y / 100 * canvas.height;
+                        const endX = endNode.x / 100 * canvas.width;
+                        const endY = endNode.y / 100 * canvas.height;
+                        
+                        ctx.beginPath();
+                        ctx.moveTo(startX, startY);
+                        ctx.lineTo(endX, endY);
+                        
+                        // Style based on selection and walkability
+                        if (selectedPath && selectedPath.id === path.id) {
+                            ctx.strokeStyle = '#ff0000';
+                            ctx.lineWidth = 3;
+                        } else {
+                            ctx.strokeStyle = path.walkable ? '#666666' : '#cccccc';
+                            ctx.lineWidth = path.walkable ? 2 : 1;
+                        }
+                        
+                        ctx.stroke();
+                        
+                        // Draw distance label
+                        const midX = (startX + endX) / 2;
+                        const midY = (startY + endY) / 2;
+                        
+                        ctx.fillStyle = '#ffffff';
+                        ctx.fillRect(midX - 15, midY - 10, 30, 20);
+                        ctx.fillStyle = '#000000';
+                        ctx.font = '12px Arial';
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(path.distance, midX, midY);
+                    }
+                });
+                
+                // Draw nodes
+                nodes.forEach(node => {
+                    const x = node.x / 100 * canvas.width;
+                    const y = node.y / 100 * canvas.height;
+                    const radius = (selectedNode && selectedNode.id === node.id) ? SELECTED_NODE_RADIUS : NODE_RADIUS;
+                    
+                    ctx.beginPath();
+                    ctx.arc(x, y, radius, 0, Math.PI * 2);
+                    ctx.fillStyle = NODE_COLORS[node.type] || '#666666';
+                    ctx.fill();
+                    
+                    if (selectedNode && selectedNode.id === node.id) {
+                        ctx.strokeStyle = '#ff0000';
+                        ctx.lineWidth = 2;
+                        ctx.stroke();
+                    }
+                    
+                    // Draw node ID
+                    ctx.fillStyle = '#ffffff';
+                    ctx.font = '10px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(node.id, x, y);
+                });
+                
+                // Draw path creation preview
+                if (currentTool === 'add-path' && pathStartNode) {
+                    const startX = pathStartNode.x / 100 * canvas.width;
+                    const startY = pathStartNode.y / 100 * canvas.height;
+                    
+                    // Get current mouse position
+                    const rect = canvas.getBoundingClientRect();
+                    const mouseX = (event.clientX - rect.left) / canvas.width * 100;
+                    const mouseY = (event.clientY - rect.top) / canvas.height * 100;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY);
+                    ctx.lineTo(mouseX / 100 * canvas.width, mouseY / 100 * canvas.height);
+                    ctx.strokeStyle = '#ff0000';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([5, 5]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            }
+            
+            // Helper functions
+            
+            // Find node at position
+            function findNodeAt(x, y) {
+                return nodes.find(node => isPointInNode(x, y, node));
+            }
+            
+            // Check if point is in node
+            function isPointInNode(x, y, node) {
+                const distance = Math.sqrt(Math.pow(node.x - x, 2) + Math.pow(node.y - y, 2));
+                return distance <= (NODE_RADIUS / canvas.width * 100);
+            }
+            
+            // Find path at position
+            function findPathAt(x, y) {
+                for (const path of paths) {
+                    const startNode = nodes.find(n => n.id === path.start);
+                    const endNode = nodes.find(n => n.id === path.end);
+                    
+                    if (startNode && endNode) {
+                        if (isPointOnLine(
+                            x, y,
+                            startNode.x, startNode.y,
+                            endNode.x, endNode.y
+                        )) {
+                            return path;
+                        }
+                    }
+                }
+                return null;
+            }
+            
+            // Check if point is on line
+            function isPointOnLine(x, y, x1, y1, x2, y2) {
+                const lineLength = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                const distance = pointToLineDistance(x, y, x1, y1, x2, y2);
+                
+                // Check if point is close enough to line
+                if (distance > (3 / canvas.width * 100)) {
+                    return false;
+                }
+                
+                // Check if point is between the endpoints
+                const dot = ((x - x1) * (x2 - x1) + (y - y1) * (y2 - y1)) / Math.pow(lineLength, 2);
+                return dot >= 0 && dot <= 1;
+            }
+            
+            // Calculate distance from point to line
+            function pointToLineDistance(x, y, x1, y1, x2, y2) {
+                const A = x - x1;
+                const B = y - y1;
+                const C = x2 - x1;
+                const D = y2 - y1;
+                
+                const dot = A * C + B * D;
+                const lenSq = C * C + D * D;
+                let param = -1;
+                
+                if (lenSq !== 0) {
+                    param = dot / lenSq;
+                }
+                
+                let xx, yy;
+                
+                if (param < 0) {
+                    xx = x1;
+                    yy = y1;
+                } else if (param > 1) {
+                    xx = x2;
+                    yy = y2;
+                } else {
+                    xx = x1 + param * C;
+                    yy = y1 + param * D;
+                }
+                
+                const dx = x - xx;
+                const dy = y - yy;
+                
+                return Math.sqrt(dx * dx + dy * dy);
+            }
+            
+            // Calculate distance between two nodes
+            function calculateDistance(node1, node2) {
+                return Math.round(Math.sqrt(Math.pow(node2.x - node1.x, 2) + Math.pow(node2.y - node1.y, 2)));
+            }
+            
+            // Generate unique node ID
+            function generateNodeId() {
+                let id;
+                let counter = 1;
+                
+                do {
+                    id = `node${counter}`;
+                    counter++;
+                } while (nodes.some(n => n.id === id));
+                
+                return id;
+            }
+            
+            // Generate unique path ID
+            function generatePathId() {
+                let id;
+                let counter = 1;
+                
+                do {
+                    id = `path${counter}`;
+                    counter++;
+                } while (paths.some(p => p.id === id));
+                
+                return id;
+            }
+            
+            // Delete path by ID
+            function deletePathById(pathId) {
+                const pathIndex = paths.findIndex(p => p.id === pathId);
+                
+                if (pathIndex !== -1) {
+                    const path = paths[pathIndex];
+                    
+                    // Remove path from connections of nodes
+                    const startNode = nodes.find(n => n.id === path.start);
+                    const endNode = nodes.find(n => n.id === path.end);
+                    
+                    if (startNode) {
+                        startNode.connections = startNode.connections.filter(c => c !== path.id);
+                    }
+                    
+                    if (endNode) {
+                        endNode.connections = endNode.connections.filter(c => c !== path.id);
+                    }
+                    
+                    // Remove path
+                    paths.splice(pathIndex, 1);
+                    
+                    if (selectedPath && selectedPath.id === pathId) {
+                        selectedPath = null;
+                    }
+                    
+                    statusText.textContent = `Path ${pathId} deleted`;
+                    updateUI();
+                    render();
+                }
+            }
+            
+            // Initialize the editor
+            init();
+            
+            // Try to load existing pathways.json
+            fetch('data/pathways.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load pathways.json');
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.nodes && data.paths) {
+                        nodes = data.nodes;
+                        paths = data.paths;
+                        statusText.textContent = 'Loaded existing pathways.json';
+                        updateUI();
+                        render();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading pathways.json:', error);
+                    statusText.textContent = 'No existing pathways.json found. Starting with empty editor.';
+                });
+        });
+    </script>
+</body>
+</html>

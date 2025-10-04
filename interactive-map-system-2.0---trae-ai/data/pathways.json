@@ -1,0 +1,977 @@
+{
+  "nodes": [
+    {
+      "id": "gate3",
+      "x": 78.6,
+      "y": 41.5,
+      "name": "Gate 3",
+      "type": "gate",
+      "connections": [
+        "path17"
+      ]
+    },
+    {
+      "id": "jacques",
+      "x": 57.8,
+      "y": 28.9,
+      "name": "St. Jacques",
+      "type": "building",
+      "connections": [
+        "path19",
+        "path20"
+      ]
+    },
+    {
+      "id": "aquinas",
+      "x": 48.7,
+      "y": 45.7,
+      "name": "St. Thomas Aquinas",
+      "type": "building",
+      "connections": [
+        "path31",
+        "path32",
+        "path36",
+        "path56",
+        "path60"
+      ]
+    },
+    {
+      "id": "albertus",
+      "x": 36.5,
+      "y": 42.9,
+      "name": "St. Albertus Magnus",
+      "type": "building",
+      "connections": [
+        "path28",
+        "path29",
+        "path57"
+      ]
+    },
+    {
+      "id": "gate4",
+      "x": 32.6,
+      "y": 18.3,
+      "name": "Gate 4",
+      "type": "gate",
+      "connections": [
+        "path26"
+      ]
+    },
+    {
+      "id": "martin",
+      "x": 26.1,
+      "y": 57.9,
+      "name": "St. Martin",
+      "type": "building",
+      "connections": [
+        "path44",
+        "path45"
+      ]
+    },
+    {
+      "id": "francisca",
+      "x": 40.2,
+      "y": 68,
+      "name": "Gym / Auditorium",
+      "type": "building",
+      "connections": [
+        "path38",
+        "path39"
+      ]
+    },
+    {
+      "id": "dominic",
+      "x": 51.9,
+      "y": 71.8,
+      "name": "St. Dominic",
+      "type": "building",
+      "connections": [
+        "path9",
+        "path10",
+        "path58"
+      ]
+    },
+    {
+      "id": "rose",
+      "x": 58.6,
+      "y": 62.5,
+      "name": "St. Rose",
+      "type": "building",
+      "connections": [
+        "path11",
+        "path12"
+      ]
+    },
+    {
+      "id": "gate2",
+      "x": 67,
+      "y": 69.6,
+      "name": "Gate 2",
+      "type": "gate",
+      "connections": [
+        "path5"
+      ]
+    },
+    {
+      "id": "gate1",
+      "x": 72.6,
+      "y": 87.3,
+      "name": "Gate 1",
+      "type": "gate",
+      "connections": [
+        "path1"
+      ]
+    },
+    {
+      "id": "natividad",
+      "x": 69.1,
+      "y": 88.2,
+      "name": "Mother Natividad",
+      "type": "building",
+      "connections": [
+        "path3"
+      ]
+    },
+    {
+      "id": "node13",
+      "x": 63.713385111712505,
+      "y": 75.99591419816139,
+      "name": "Node node13",
+      "type": "junction",
+      "connections": [
+        "path2",
+        "path4",
+        "path6"
+      ]
+    },
+    {
+      "id": "node14",
+      "x": 70.53981938912717,
+      "y": 84.67824310520939,
+      "name": "Node node14",
+      "type": "junction",
+      "connections": [
+        "path1",
+        "path2",
+        "path3"
+      ]
+    },
+    {
+      "id": "node15",
+      "x": 54.272571749330524,
+      "y": 82.2267620020429,
+      "name": "Node node15",
+      "type": "junction",
+      "connections": [
+        "path6",
+        "path7"
+      ]
+    },
+    {
+      "id": "node16",
+      "x": 60.0823030492579,
+      "y": 70.48008171603676,
+      "name": "Node node16",
+      "type": "junction",
+      "connections": [
+        "path4",
+        "path5",
+        "path10",
+        "path11"
+      ]
+    },
+    {
+      "id": "node17",
+      "x": 56.59646426930147,
+      "y": 58.63125638406538,
+      "name": "Node node17",
+      "type": "junction",
+      "connections": [
+        "path12",
+        "path13",
+        "path14",
+        "path15"
+      ]
+    },
+    {
+      "id": "node18",
+      "x": 49.47954342689043,
+      "y": 74.97446373850867,
+      "name": "Node node18",
+      "type": "junction",
+      "connections": [
+        "path8",
+        "path9"
+      ]
+    },
+    {
+      "id": "node19",
+      "x": 48.53546209065223,
+      "y": 79.57099080694586,
+      "name": "Node node19",
+      "type": "junction",
+      "connections": [
+        "path7",
+        "path8",
+        "path40"
+      ]
+    },
+    {
+      "id": "node20",
+      "x": 40.91018975949755,
+      "y": 75.17875383043922,
+      "name": "Node node20",
+      "type": "junction",
+      "connections": [
+        "path39",
+        "path40",
+        "path55"
+      ]
+    },
+    {
+      "id": "node21",
+      "x": 30.81578162587373,
+      "y": 82.53319713993871,
+      "name": "Node node21",
+      "type": "junction",
+      "connections": [
+        "path42",
+        "path41"
+      ]
+    },
+    {
+      "id": "node22",
+      "x": 26.531104792177292,
+      "y": 73.34014300306436,
+      "name": "Node node22",
+      "type": "junction",
+      "connections": [
+        "path42",
+        "path43"
+      ]
+    },
+    {
+      "id": "node23",
+      "x": 21.447589904740834,
+      "y": 67.31358529111337,
+      "name": "Node node23",
+      "type": "junction",
+      "connections": [
+        "path43",
+        "path44"
+      ]
+    },
+    {
+      "id": "node24",
+      "x": 28.63713238840096,
+      "y": 58.42696629213483,
+      "name": "Node node24",
+      "type": "junction",
+      "connections": [
+        "path45",
+        "path46"
+      ]
+    },
+    {
+      "id": "node25",
+      "x": 31.83248460336102,
+      "y": 58.22267620020429,
+      "name": "Node node25",
+      "type": "junction",
+      "connections": [
+        "path46",
+        "path48"
+      ]
+    },
+    {
+      "id": "node26",
+      "x": 35.53618830706473,
+      "y": 55.566905005107245,
+      "name": "Node node26",
+      "type": "junction",
+      "connections": [
+        "path51",
+        "path52"
+      ]
+    },
+    {
+      "id": "node27",
+      "x": 39.31251365201752,
+      "y": 55.87334014300307,
+      "name": "Node node27",
+      "type": "junction",
+      "connections": [
+        "path52",
+        "path53",
+        "path56",
+        "path57"
+      ]
+    },
+    {
+      "id": "node28",
+      "x": 40.76494647699936,
+      "y": 50.970377936670076,
+      "name": "Node node28",
+      "type": "junction",
+      "connections": [
+        "path53",
+        "path54"
+      ]
+    },
+    {
+      "id": "node29",
+      "x": 40.76494647699936,
+      "y": 46.782431052093976,
+      "name": "Node node29",
+      "type": "junction",
+      "connections": [
+        "path29",
+        "path30",
+        "path54"
+      ]
+    },
+    {
+      "id": "node30",
+      "x": 54.780923238074166,
+      "y": 36.46578140960163,
+      "name": "Node node30",
+      "type": "junction",
+      "connections": [
+        "path20",
+        "path21",
+        "path34",
+        "path35",
+        "path60"
+      ]
+    },
+    {
+      "id": "node31",
+      "x": 46.13894792943219,
+      "y": 21.756894790602654,
+      "name": "Node node31",
+      "type": "junction",
+      "connections": [
+        "path21",
+        "path22",
+        "path24"
+      ]
+    },
+    {
+      "id": "node32",
+      "x": 54.85354487932326,
+      "y": 11.338100102145047,
+      "name": "Node node32",
+      "type": "junction",
+      "connections": [
+        "path22",
+        "path23"
+      ]
+    },
+    {
+      "id": "node33",
+      "x": 63.93125003545978,
+      "y": 25.229826353421856,
+      "name": "Node node33",
+      "type": "junction",
+      "connections": [
+        "path18",
+        "path19",
+        "path23"
+      ]
+    },
+    {
+      "id": "node34",
+      "x": 40.03873006450844,
+      "y": 13.585291113381,
+      "name": "Node node34",
+      "type": "junction",
+      "connections": [
+        "path24",
+        "path25"
+      ]
+    },
+    {
+      "id": "node35",
+      "x": 30.52529506087736,
+      "y": 30.132788559754854,
+      "name": "Node node35",
+      "type": "junction",
+      "connections": [
+        "path27",
+        "path28"
+      ]
+    },
+    {
+      "id": "node36",
+      "x": 35.10045845957017,
+      "y": 20.224719101123593,
+      "name": "Node node36",
+      "type": "junction",
+      "connections": [
+        "path25",
+        "path26",
+        "path27"
+      ]
+    },
+    {
+      "id": "node37",
+      "x": 45.703218081937635,
+      "y": 43.61593462717058,
+      "name": "Node node37",
+      "type": "junction",
+      "connections": [
+        "path30",
+        "path31",
+        "path33"
+      ]
+    },
+    {
+      "id": "node38",
+      "x": 49.334300144392245,
+      "y": 40.755873340143,
+      "name": "Node node38",
+      "type": "junction",
+      "connections": [
+        "path32",
+        "path33",
+        "path34"
+      ]
+    },
+    {
+      "id": "node39",
+      "x": 61.46211423299065,
+      "y": 50.663942798774265,
+      "name": "Node node39",
+      "type": "junction",
+      "connections": [
+        "path15",
+        "path16",
+        "path35"
+      ]
+    },
+    {
+      "id": "node40",
+      "x": 69.52311641163989,
+      "y": 35.648621041879466,
+      "name": "Node node40",
+      "type": "junction",
+      "connections": [
+        "path16",
+        "path17",
+        "path18"
+      ]
+    },
+    {
+      "id": "node41",
+      "x": 52.31178743560503,
+      "y": 51.88968335035751,
+      "name": "Node node41",
+      "type": "junction",
+      "connections": [
+        "path14",
+        "path36",
+        "path59"
+      ]
+    },
+    {
+      "id": "node42",
+      "x": 34.08375548208288,
+      "y": 59.14198161389172,
+      "name": "Node node42",
+      "type": "junction",
+      "connections": [
+        "path48",
+        "path47",
+        "path51"
+      ]
+    },
+    {
+      "id": "node43",
+      "x": 31.905106244610117,
+      "y": 63.02349336057201,
+      "name": "Node node43",
+      "type": "junction",
+      "connections": [
+        "path47",
+        "path49"
+      ]
+    },
+    {
+      "id": "node44",
+      "x": 36.7707562082993,
+      "y": 62.206332992849845,
+      "name": "Node node44",
+      "type": "junction",
+      "connections": [
+        "path49",
+        "path50"
+      ]
+    },
+    {
+      "id": "node45",
+      "x": 40.76494647699936,
+      "y": 65.27068437180796,
+      "name": "Node node45",
+      "type": "junction",
+      "connections": [
+        "path37",
+        "path38",
+        "path50"
+      ]
+    },
+    {
+      "id": "node46",
+      "x": 48.099732243157675,
+      "y": 63.32992849846782,
+      "name": "Node node46",
+      "type": "junction",
+      "connections": [
+        "path13",
+        "path37",
+        "path58",
+        "path59"
+      ]
+    },
+    {
+      "id": "node1",
+      "x": 35.89929651331018,
+      "y": 77.52808988764045,
+      "name": "Node node1",
+      "type": "junction",
+      "connections": [
+        "path41",
+        "path55"
+      ]
+    },
+    {
+      "id": "node2",
+      "x": 35.89929651331018,
+      "y": 77.52808988764045,
+      "name": "Node node2",
+      "type": "junction",
+      "connections": []
+    }
+  ],
+  "paths": [
+    {
+      "id": "path1",
+      "start": "node14",
+      "end": "gate1",
+      "distance": 3,
+      "walkable": true
+    },
+    {
+      "id": "path2",
+      "start": "node13",
+      "end": "node14",
+      "distance": 11,
+      "walkable": true
+    },
+    {
+      "id": "path3",
+      "start": "natividad",
+      "end": "node14",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path4",
+      "start": "node16",
+      "end": "node13",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path5",
+      "start": "node16",
+      "end": "gate2",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path6",
+      "start": "node13",
+      "end": "node15",
+      "distance": 11,
+      "walkable": true
+    },
+    {
+      "id": "path7",
+      "start": "node15",
+      "end": "node19",
+      "distance": 6,
+      "walkable": true
+    },
+    {
+      "id": "path8",
+      "start": "node19",
+      "end": "node18",
+      "distance": 5,
+      "walkable": true
+    },
+    {
+      "id": "path9",
+      "start": "node18",
+      "end": "dominic",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path10",
+      "start": "dominic",
+      "end": "node16",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path11",
+      "start": "node16",
+      "end": "rose",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path12",
+      "start": "rose",
+      "end": "node17",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path13",
+      "start": "node17",
+      "end": "node46",
+      "distance": 10,
+      "walkable": true
+    },
+    {
+      "id": "path14",
+      "start": "node17",
+      "end": "node41",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path15",
+      "start": "node17",
+      "end": "node39",
+      "distance": 9,
+      "walkable": true
+    },
+    {
+      "id": "path16",
+      "start": "node39",
+      "end": "node40",
+      "distance": 17,
+      "walkable": true
+    },
+    {
+      "id": "path17",
+      "start": "node40",
+      "end": "gate3",
+      "distance": 11,
+      "walkable": true
+    },
+    {
+      "id": "path18",
+      "start": "node40",
+      "end": "node33",
+      "distance": 12,
+      "walkable": true
+    },
+    {
+      "id": "path19",
+      "start": "node33",
+      "end": "jacques",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path20",
+      "start": "jacques",
+      "end": "node30",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path21",
+      "start": "node30",
+      "end": "node31",
+      "distance": 17,
+      "walkable": true
+    },
+    {
+      "id": "path22",
+      "start": "node31",
+      "end": "node32",
+      "distance": 14,
+      "walkable": true
+    },
+    {
+      "id": "path23",
+      "start": "node32",
+      "end": "node33",
+      "distance": 17,
+      "walkable": true
+    },
+    {
+      "id": "path24",
+      "start": "node31",
+      "end": "node34",
+      "distance": 10,
+      "walkable": true
+    },
+    {
+      "id": "path25",
+      "start": "node34",
+      "end": "node36",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path26",
+      "start": "node36",
+      "end": "gate4",
+      "distance": 3,
+      "walkable": true
+    },
+    {
+      "id": "path27",
+      "start": "node36",
+      "end": "node35",
+      "distance": 11,
+      "walkable": true
+    },
+    {
+      "id": "path28",
+      "start": "node35",
+      "end": "albertus",
+      "distance": 14,
+      "walkable": true
+    },
+    {
+      "id": "path29",
+      "start": "albertus",
+      "end": "node29",
+      "distance": 6,
+      "walkable": true
+    },
+    {
+      "id": "path30",
+      "start": "node29",
+      "end": "node37",
+      "distance": 6,
+      "walkable": true
+    },
+    {
+      "id": "path31",
+      "start": "node37",
+      "end": "aquinas",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path32",
+      "start": "aquinas",
+      "end": "node38",
+      "distance": 5,
+      "walkable": true
+    },
+    {
+      "id": "path33",
+      "start": "node38",
+      "end": "node37",
+      "distance": 5,
+      "walkable": true
+    },
+    {
+      "id": "path34",
+      "start": "node38",
+      "end": "node30",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path35",
+      "start": "node30",
+      "end": "node39",
+      "distance": 16,
+      "walkable": true
+    },
+    {
+      "id": "path36",
+      "start": "node41",
+      "end": "aquinas",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path37",
+      "start": "node46",
+      "end": "node45",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path38",
+      "start": "node45",
+      "end": "francisca",
+      "distance": 3,
+      "walkable": true
+    },
+    {
+      "id": "path39",
+      "start": "francisca",
+      "end": "node20",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path40",
+      "start": "node20",
+      "end": "node19",
+      "distance": 9,
+      "walkable": true
+    },
+    {
+      "id": "path42",
+      "start": "node21",
+      "end": "node22",
+      "distance": 10,
+      "walkable": true
+    },
+    {
+      "id": "path43",
+      "start": "node22",
+      "end": "node23",
+      "distance": 8,
+      "walkable": true
+    },
+    {
+      "id": "path44",
+      "start": "node23",
+      "end": "martin",
+      "distance": 11,
+      "walkable": true
+    },
+    {
+      "id": "path45",
+      "start": "martin",
+      "end": "node24",
+      "distance": 3,
+      "walkable": true
+    },
+    {
+      "id": "path46",
+      "start": "node24",
+      "end": "node25",
+      "distance": 3,
+      "walkable": true
+    },
+    {
+      "id": "path48",
+      "start": "node25",
+      "end": "node42",
+      "distance": 2,
+      "walkable": true
+    },
+    {
+      "id": "path47",
+      "start": "node42",
+      "end": "node43",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path49",
+      "start": "node43",
+      "end": "node44",
+      "distance": 5,
+      "walkable": true
+    },
+    {
+      "id": "path50",
+      "start": "node44",
+      "end": "node45",
+      "distance": 5,
+      "walkable": true
+    },
+    {
+      "id": "path51",
+      "start": "node42",
+      "end": "node26",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path52",
+      "start": "node26",
+      "end": "node27",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path53",
+      "start": "node27",
+      "end": "node28",
+      "distance": 5,
+      "walkable": true
+    },
+    {
+      "id": "path54",
+      "start": "node28",
+      "end": "node29",
+      "distance": 4,
+      "walkable": true
+    },
+    {
+      "id": "path41",
+      "start": "node21",
+      "end": "node1",
+      "distance": 7,
+      "walkable": true
+    },
+    {
+      "id": "path55",
+      "start": "node1",
+      "end": "node20",
+      "distance": 6,
+      "walkable": true
+    },
+    {
+      "id": "path56",
+      "start": "aquinas",
+      "end": "node27",
+      "distance": 14,
+      "walkable": true
+    },
+    {
+      "id": "path57",
+      "start": "node27",
+      "end": "albertus",
+      "distance": 13,
+      "walkable": true
+    },
+    {
+      "id": "path58",
+      "start": "node46",
+      "end": "dominic",
+      "distance": 9,
+      "walkable": true
+    },
+    {
+      "id": "path59",
+      "start": "node46",
+      "end": "node41",
+      "distance": 12,
+      "walkable": true
+    },
+    {
+      "id": "path60",
+      "start": "aquinas",
+      "end": "node30",
+      "distance": 11,
+      "walkable": true
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Siena Campus Map</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+  <div id="header-inner">
+    <img src="assets/siena logo.png" alt="Siena College Taytay Logo" id = "logo"/>
+    <input type="text" id="search" placeholder="Search for a room, office, or building..." />
+  </div>
+  <ul id="search-results"></ul>
+  </header>
+
+<main>
+  <div id="zoom-wrapper">
+    <div id="map-container">
+      <img src="assets/map outline 7.png" alt="Campus Map" id="campus-map" />
+      <canvas id="path-canvas" class="map-overlay"></canvas>
+    </div>
+  </div> <!-- this closes zoom-wrapper -->
+  <div id="zoom-controls">
+    <button onclick="zoomIn()">+</button>
+    <button onclick="zoomOut()">-</button>
+  </div>
+  <div id="pathfinder-controls">
+    <div class="pathfinder-header">
+      <h3>Find Shortest Path</h3>
+      <button id="toggle-pathfinder" class="toggle-btn">Show</button>
+    </div>
+    <div id="pathfinder-panel" class="hidden">
+      <div class="point-selection">
+        <div class="point-row">
+          <span class="point-label">Start Point:</span>
+          <select id="start-point-dropdown" class="location-dropdown">
+            <option value="">Select location...</option>
+            <!-- Options will be populated by JavaScript -->
+          </select>
+        </div>
+        <div class="point-row">
+          <span class="point-label">End Point:</span>
+          <select id="end-point-dropdown" class="location-dropdown">
+            <option value="">Select location...</option>
+            <!-- Options will be populated by JavaScript -->
+          </select>
+        </div>
+      </div>
+      <div class="path-actions">
+        <button id="find-path" class="action-btn" disabled>Find Path</button>
+        <button id="clear-path" class="action-btn" disabled>Clear</button>
+      </div>
+      <div id="path-info" class="hidden">
+        <p>Distance: <span id="path-distance">0</span> meters</p>
+        <p>Estimated time: <span id="path-time">0</span></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="js/pathfinder.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

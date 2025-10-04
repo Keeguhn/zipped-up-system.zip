@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>St. Dominic Building</title>
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    .floor-heading {
+      grid-column: 1/-1;
+      margin-top: 2.5rem;
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+      font-weight: 800;
+      border-radius: 8px;
+      box-shadow: none;
+      padding: 0.6rem 1.2rem 0.6rem 1.5rem;
+      letter-spacing: 0.01em;
+      display: block;
+      width: 100%;
+    }
+    .floor-5 { color: #b71c1c; background: #fff4f4; border-left: 8px solid #b71c1c; }
+    .floor-4 { color: #1565c0; background: #f0f6ff; border-left: 8px solid #1565c0; }
+    .floor-3 { color: #388e3c; background: #f3fbf4; border-left: 8px solid #388e3c; }
+    .floor-2 { color: #f9a825; background: #fffbe7; border-left: 8px solid #f9a825; }
+    .floor-ground { color: #6d4c41; background: #f8f4f1; border-left: 8px solid #6d4c41; }
+    .floor-basement { color: #512da8; background: #f3f0fa; border-left: 8px solid #512da8; }
+    body {
+      background: #f8f9fa;
+      margin: 0;
+      font-family: 'Poppins', 'Inter', Arial, sans-serif;
+      color: #222;
+    }
+    .building-header {
+      background: #fff;
+      padding: 2.5rem 0 1.5rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      border-bottom: 1.5px solid #eee;
+      text-align: center;
+    }
+    .building-header h1 {
+      color: #b71c1c;
+      font-size: 2.3rem;
+      font-weight: 800;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: 0.01em;
+    }
+    .building-header h3 {
+      color: #444;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin: 0 0 1.2rem 0;
+    }
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: #888;
+      margin: 0 0 1.5rem 0;
+      padding-left: 1.5rem;
+    }
+    .breadcrumbs a {
+      color: #b71c1c;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.15s;
+    }
+    .breadcrumbs a:hover {
+      color: #d32f2f;
+      text-decoration: underline;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      border: 2px solid #b71c1c;
+      color: #b71c1c;
+      background: #fff;
+      border-radius: 6px;
+      padding: 0.4rem 1.1rem 0.4rem 0.8rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+      text-decoration: none;
+      margin: 1.2rem 0 0 1.5rem;
+      transition: background 0.15s, color 0.15s, border 0.15s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .back-btn:hover {
+      background: #b71c1c;
+      color: #fff;
+      border-color: #b71c1c;
+    }
+    .back-btn svg {
+      margin-right: 0.5rem;
+      width: 1.1em;
+      height: 1.1em;
+      vertical-align: middle;
+      fill: currentColor;
+    }
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 2rem;
+      padding: 2.5rem 2rem 3rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .room-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: box-shadow 0.18s, transform 0.18s;
+      min-height: 320px;
+      position: relative;
+    }
+    .room-card:hover {
+      box-shadow: 0 6px 24px rgba(183,28,28,0.13);
+      transform: scale(1.025);
+      z-index: 2;
+    }
+    .room-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #b71c1c;
+      margin-bottom: 0.3rem;
+      margin-top: 0;
+    }
+    .room-type {
+      font-size: 1.05rem;
+      color: #555;
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+    }
+    .room-thumb {
+      width: 100%;
+      max-width: 260px;
+      border-radius: 8px;
+      margin-bottom: 1.1rem;
+      object-fit: cover;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+      align-self: center;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .start-tour-btn {
+      margin-top: auto;
+      background: #b71c1c;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 0.7rem 1.4rem;
+      font-size: 1.08rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 1px 6px rgba(183,28,28,0.08);
+      transition: background 0.15s, box-shadow 0.15s;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .start-tour-btn:hover {
+      background: #d32f2f;
+      box-shadow: 0 4px 16px rgba(183,28,28,0.13);
+    }
+    @media (max-width: 700px) {
+      .room-grid {
+        grid-template-columns: 1fr;
+        padding: 1.2rem 0.5rem 2rem 0.5rem;
+      }
+      .back-btn, .breadcrumbs {
+        padding-left: 0.5rem;
+        margin-left: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="building-header">
+    <a href="../index.html" class="back-btn">
+      <svg viewBox="0 0 20 20"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+      Back to Map
+    </a>
+    <h1>St. Dominic Building</h1>
+    <h3>This building contains lecture halls, offices, and labs.</h3>
+    <nav class="breadcrumbs">
+      <a href="../index.html">Map</a> &gt; <span>St. Dominic</span>
+    </nav>
+  </div>
+  <main>
+    <section class="room-grid">
+  <h2 class="floor-heading floor-5" style="margin-top: 0;">5th Floor</h2>
+      <div class="room-card" id="SDB501">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB501" alt="Preview of SDB501" />
+        <h2 class="room-title">SDB501</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB501" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB502">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB502" alt="Preview of SDB502" />
+        <h2 class="room-title">SDB502</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB502" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB503">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB503" alt="Preview of SDB503" />
+        <h2 class="room-title">SDB503</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB503" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB504">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB504" alt="Preview of SDB504" />
+        <h2 class="room-title">SDB504</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB504" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB505">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB505" alt="Preview of SDB505" />
+        <h2 class="room-title">SDB505</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB505" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB506">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB506" alt="Preview of SDB506" />
+        <h2 class="room-title">SDB506</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB506" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB507">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB507" alt="Preview of SDB507" />
+        <h2 class="room-title">SDB507</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB507" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB511">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB511" alt="Preview of SDB511" />
+        <h2 class="room-title">SDB511</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB511" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB512">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB512" alt="Preview of SDB512" />
+        <h2 class="room-title">SDB512</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB512" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB513">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB513" alt="Preview of SDB513" />
+        <h2 class="room-title">SDB513</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB513" class="start-tour-btn">Start Tour</a>
+      </div>
+      <div class="room-card" id="SDB514">
+        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB514" alt="Preview of SDB514" />
+        <h2 class="room-title">SDB514</h2>
+        <div class="room-type">Room</div>
+        <a href="../360-viewer.html?room=SDB514" class="start-tour-btn">Start Tour</a>
+      </div>
+  <h2 class="floor-heading floor-4">4th Floor</h2>
+        <div class="room-card" id="SDB401">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB401" alt="Preview of SDB401" />
+          <h2 class="room-title">SDB401</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB401" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB402">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB402" alt="Preview of SDB402" />
+          <h2 class="room-title">SDB402</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB402" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB403">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB403" alt="Preview of SDB403" />
+          <h2 class="room-title">SDB403</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB403" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB404">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB404" alt="Preview of SDB404" />
+          <h2 class="room-title">SDB404</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB404" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB405">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB405" alt="Preview of SDB405" />
+          <h2 class="room-title">SDB405</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB405" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB406">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB406" alt="Preview of SDB406" />
+          <h2 class="room-title">SDB406</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB406" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB407">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB407" alt="Preview of SDB407" />
+          <h2 class="room-title">SDB407</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB407" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB408">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB408" alt="Preview of SDB408" />
+          <h2 class="room-title">SDB408</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB408" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB409">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB409" alt="Preview of SDB409" />
+          <h2 class="room-title">SDB409</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB409" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB410">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB410" alt="Preview of SDB410" />
+          <h2 class="room-title">SDB410</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB410" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB411">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB411" alt="Preview of SDB411" />
+          <h2 class="room-title">SDB411</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB411" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB412">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB412" alt="Preview of SDB412" />
+          <h2 class="room-title">SDB412</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB412" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB413">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB413" alt="Preview of SDB413" />
+          <h2 class="room-title">SDB413</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB413" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB414">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB414" alt="Preview of SDB414" />
+          <h2 class="room-title">SDB414</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB414" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB415">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB415" alt="Preview of SDB415" />
+          <h2 class="room-title">SDB415</h2>
+          <div class="room-type">Room</div>
+          <a href="../360-viewer.html?room=SDB415" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="SDB416">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB416" alt="Preview of SDB416" />
+          <h2 class="room-title">Publication Office</h2>
+          <div class="room-type">SDB416</div>
+          <a href="../360-viewer.html?room=SDB416" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="HSPSFO">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=HS+Prefect+Office" alt="Preview of High School Prefect of Student Formation Office" />
+          <h2 class="room-title">High School Prefect of Student Formation Office</h2>
+          <div class="room-type">Office</div>
+          <a href="../360-viewer.html?room=High School Prefect of Student Formation Office" class="start-tour-btn">Start Tour</a>
+        </div>
+        <div class="room-card" id="JLL">
+          <img class="room-thumb" src="https://via.placeholder.com/320x140?text=JLL+Office" alt="Preview of Junior Level Leaders (JLL) Office" />
+          <h2 class="room-title">Junior Level Leaders (JLL) Office</h2>
+          <div class="room-type">Office</div>
+          <a href="../360-viewer.html?room=JLL" class="start-tour-btn">Start Tour</a>
+        </div>
+          <h2 class="floor-heading floor-3">3rd Floor</h2>
+          <div class="room-card" id="SDB311">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB311" alt="Preview of SDB311" />
+            <h2 class="room-title">SDB311</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB311" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB312">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB312" alt="Preview of SDB312" />
+            <h2 class="room-title">SDB312</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB312" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB313">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB313" alt="Preview of SDB313" />
+            <h2 class="room-title">SDB313</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB313" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB314">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB314" alt="Preview of SDB314" />
+            <h2 class="room-title">SDB314</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB314" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB315">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB315" alt="Preview of SDB315" />
+            <h2 class="room-title">SDB315</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB315" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB316">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB316" alt="Preview of SDB316" />
+            <h2 class="room-title">SDB316</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB316" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB317">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB317" alt="Preview of SDB317" />
+            <h2 class="room-title">Professional Learning Community (PLC Room)</h2>
+            <div class="room-type">SDB317</div>
+            <a href="../360-viewer.html?room=Professional Learning Community Room" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="ExhibitRoom">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB317" alt="Preview of ExhibitRoom" />
+            <h2 class="room-title">Exhibit Room</h2>
+            <div class="room-type">SDB317</div>
+            <a href="../360-viewer.html?room=Exhibit Room" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB318">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB318" alt="Preview of SDB318" />
+            <h2 class="room-title">SDB318</h2>
+            <div class="room-type">Room</div>
+            <a href="../360-viewer.html?room=SDB318" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB320">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB320" alt="Preview of SDB320" />
+            <h2 class="room-title">SDB320</h2>
+            <div class="room-type">Lab</div>
+            <a href="../360-viewer.html?room=SDB320" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB321">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB321" alt="Preview of SDB321" />
+            <h2 class="room-title">Integrated Science Laboratory</h2>
+            <div class="room-type">SDB321</div>
+            <a href="../360-viewer.html?room=SDB321" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB322">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB322" alt="Preview of SDB322" />
+            <h2 class="room-title">Chemistry Laboratory</h2>
+            <div class="room-type">SDB322</div>
+            <a href="../360-viewer.html?room=SDB322" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="SDB323">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB323" alt="Preview of SDB323" />
+            <h2 class="room-title">Physics Laboratory</h2>
+            <div class="room-type">SDB323</div>
+            <a href="../360-viewer.html?room=SDB323" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="ScienceLabOffice">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Science+Lab+Office" alt="Preview of Science Laboratory Office" />
+            <h2 class="room-title">Science Laboratory Office</h2>
+            <div class="room-type">Laboratory</div>
+            <a href="../360-viewer.html?room=Science Laboratory Office" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="ReadingFaculty">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Reading+Faculty" alt="Preview of Reading Faculty" />
+            <h2 class="room-title">Reading Faculty</h2>
+            <div class="room-type">Faculty</div>
+            <a href="../360-viewer.html?room=Reading Faculty" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="APFilipinoFaculty">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=AP+Filipino+Faculty" alt="Preview of AP & Filipino Faculty" />
+            <h2 class="room-title">AP & Filipino Faculty</h2>
+            <div class="room-type">Faculty</div>
+            <a href="../360-viewer.html?room=AP and Filipino Faculty" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="EnglishFaculty">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=English+Faculty" alt="Preview of English Faculty" />
+            <h2 class="room-title">English Faculty</h2>
+            <div class="room-type">Faculty</div>
+            <a href="../360-viewer.html?room=English Faculty" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="MAPEHFaculty">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=MAPEH+Faculty" alt="Preview of MAPEH Faculty" />
+            <h2 class="room-title">MAPEH Faculty</h2>
+            <div class="room-type">Faculty</div>
+            <a href="../360-viewer.html?room=MAPEH Faculty" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="ScienceFaculty">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Science+Faculty" alt="Preview of Science Faculty" />
+            <h2 class="room-title">Science Faculty</h2>
+            <div class="room-type">Faculty</div>
+            <a href="../360-viewer.html?room=Science Faculty" class="start-tour-btn">Start Tour</a>
+          </div>
+          <div class="room-card" id="TLEICTArea">
+            <img class="room-thumb" src="https://via.placeholder.com/320x140?text=TLE+ICT+Area" alt="Preview of TLE/ICT Area" />
+            <h2 class="room-title">TLE/ICT Area</h2>
+            <div class="room-type">Faculty</div>
+            <a href="../360-viewer.html?room=TLE/ICT Faculty" class="start-tour-btn">Start Tour</a>
+          </div>
+            <div class="room-card" id="SHSYearLevelLeader">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SHS+Year+Level+Leader" alt="Preview of SHS - Year Level Leader" />
+              <h2 class="room-title">SHS - Year Level Leader</h2>
+              <div class="room-type">Office</div>
+              <a href="../360-viewer.html?room=SHSYearLevelLeader" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SHSPrefectFormation">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SHS+Prefect+Formation" alt="Preview of SHS - Prefect of Student Formation" />
+              <h2 class="room-title">SHS - Prefect of Student Formation</h2>
+              <div class="room-type">Office</div>
+              <a href="../360-viewer.html?room=SHSPrefectFormation" class="start-tour-btn">Start Tour</a>
+            </div>
+            <h2 class="floor-heading floor-2">2nd Floor</h2>
+            <div class="room-card" id="IMCOffice">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=IMC+Office" alt="Preview of Instructional Media Center Office" />
+              <h2 class="room-title">Instructional Media Center Office</h2>
+              <div class="room-type">Office</div>
+              <a href="../360-viewer.html?room=Instructional Media Center Office" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="GSLRC">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=GS+Learning+Resource+Center" alt="Preview of Grade School Learning Resource Center" />
+              <h2 class="room-title">Grade School Learning Resource Center</h2>
+              <div class="room-type">Library</div>
+              <a href="../360-viewer.html?room=Grade School Learning Resource Center / Library" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="CLVEFaculty">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CL+VE+Faculty" alt="Preview of CL/VE Faculty" />
+              <h2 class="room-title">CL/VE Faculty</h2>
+              <div class="room-type">Faculty</div>
+              <a href="../360-viewer.html?room=CL/VE Faculty" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SDRRMOffice">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDRRM+Office" alt="Preview of Safety and Disaster Risk Management office" />
+              <h2 class="room-title">Safety and Disaster Risk Management office</h2>
+              <div class="room-type">Office</div>
+              <a href="../360-viewer.html?room=Safety and Disaster Risk Management Office" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SDB201">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB201" alt="Preview of SDB 201" />
+              <h2 class="room-title">SDB 201</h2>
+              <div class="room-type">Room</div>
+              <a href="../360-viewer.html?room=SDB201" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SDB202">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB202" alt="Preview of SDB 202" />
+              <h2 class="room-title">SDB 202</h2>
+              <div class="room-type">Room</div>
+              <a href="../360-viewer.html?room=SDB202" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SDB203">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SDB203" alt="Preview of SDB 203" />
+              <h2 class="room-title">SDB 203</h2>
+              <div class="room-type">Room</div>
+              <a href="../360-viewer.html?room=SDB203" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="ReverbLab">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Reverberation+Lab" alt="Preview of Reverberation Lab" />
+              <h2 class="room-title">Reverberation Lab</h2>
+              <div class="room-type">Lab</div>
+              <a href="../360-viewer.html?room=ReverbLab" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="MusicRoom">
+              <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Music+Room" alt="Preview of Music Room" />
+              <h2 class="room-title">Music Room</h2>
+              <div class="room-type">Room</div>
+              <a href="../360-viewer.html?room=MusicRoom" class="start-tour-btn">Start Tour</a>
+            </div>
+            <h2 class="floor-heading floor-ground">Ground Floor</h2>
+     
+              <div class="room-card" id="CompLabOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Computer+Lab+Office" alt="Preview of Computer Laboratory Office" />
+                <h2 class="room-title">Computer Laboratory Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Computer Laboratory Office" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="CollegeCompLab">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=College+Computer+Lab" alt="Preview of College Computer Lab" />
+                <h2 class="room-title">College Computer Lab</h2>
+                <div class="room-type">Lab</div>
+                <a href="../360-viewer.html?room=College Computer Lab" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="StRoseLimaHall">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=St+Rose+of+Lima+Hall" alt="Preview of St. Rose of Lima Hall" />
+                <h2 class="room-title">St. Rose of Lima Hall</h2>
+                <div class="room-type">Hall</div>
+                <a href="../360-viewer.html?room=St. Rose of Lima Hall" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="AccreditationCenter">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Accreditation+Center" alt="Preview of Accreditation Center" />
+                <h2 class="room-title">Accreditation Center</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=Accreditation Center" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="HSCompLab">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=HS+Computer+Lab" alt="Preview of H.S. Computer Lab" />
+                <h2 class="room-title">H.S. Computer Lab</h2>
+                <div class="room-type">Lab</div>
+                <a href="../360-viewer.html?room=H.S. Computer Lab" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="OfficePresident">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Office+of+the+President" alt="Preview of Office of the President" />
+                <h2 class="room-title">Office of the President</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Office of the President" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="CyberSiena">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Cyber+Siena" alt="Preview of Cyber Siena" />
+                <h2 class="room-title">Cyber Siena</h2>
+                <div class="room-type">Lab</div>
+                <a href="../360-viewer.html?room=Cyber Siena" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="FinanceOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Finance+Office" alt="Preview of Finance Office" />
+                <h2 class="room-title">Finance Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Finance Office" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="GuidanceOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Guidance+Office" alt="Preview of Office of the Guidance Services" />
+                <h2 class="room-title">Office of the Guidance Services</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Office of the Guidance Services" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="RegistrarOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Registrar+Office" alt="Preview of Registrar's Office" />
+                <h2 class="room-title">Registrar's Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Registrar's Office" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="AdmissionMarketing">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Admission+and+Marketing+Office" alt="Preview of Admission and Marketing Office" />
+                <h2 class="room-title">Admission and Marketing Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Admission and Marketing Office" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="CatharsisRoom">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Catharsis+Room" alt="Preview of Catharsis Room" />
+                <h2 class="room-title">Catharsis Room</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=Catharsis Room" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="MindfulnessRoom">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Mindfulness+Room" alt="Preview of Mindfulness Room" />
+                <h2 class="room-title">Mindfulness Room</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=Mindfulness Room" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="MultipurposeRoom">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Multipurpose+Room" alt="Preview of Multipurpose Room/Testing Room" />
+                <h2 class="room-title">Multipurpose Room/Testing Room</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=Multipurpose Room/Testing Room" class="start-tour-btn">Start Tour</a>
+              </div>
+            <h2 class="floor-heading floor-basement">Basement</h2>
+              <div class="room-card" id="MikrotikTrainingCenter">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Mikrotik+Training+Center" alt="Preview of Mikrotik Training Center" />
+                <h2 class="room-title">Mikrotik Training Center</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=Mikrotik Training Center" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="IBEDStudentCouncilOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=IBED+Student+Council+Office" alt="Preview of IBED Student Council Office" />
+                <h2 class="room-title">IBED Student Council Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=IBED Student Council Office" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="SCTAssessmentCenter">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SCT+Assessment+Center" alt="Preview of SCT Assessment Center" />
+                <h2 class="room-title">SCT Assessment Center</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SCT Assessment Center" class="start-tour-btn">Start Tour</a>
+              </div>
+              <div class="room-card" id="SCTArchives">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SCT+Archives" alt="Preview of SCT Archives" />
+                <h2 class="room-title">SCT Archives</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SCT Archives" class="start-tour-btn">Start Tour</a>
+              </div>
+            </div>
+            </div>
+    </section>
+    <div style="display: flex; justify-content: center; margin: 2.5rem 0 3.5rem 0;">
+      <a href="../index.html" class="back-btn" style="font-size: 1.15rem; padding: 0.7rem 2.2rem;">
+        <svg viewBox="0 0 20 20" style="margin-right: 0.7rem; width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor;"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+        Back to Map
+      </a>
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1333 @@
+[
+  {
+    "code": "CEIT Faculty Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CEIT Chairperson Room",
+    "name": "CEIT Chairperson Room",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Mikrotik Academy",
+    "name": "Mikrotik Academy",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CEIT Equipment Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Electronic and Circuits Laboratory",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CEIT Lecture Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+   {
+    "code": "Drawing Laboratory",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Mac Laboratory",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CEIT Computer Laboratory",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Storage Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CBA Faculty Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CBA Chairperson Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM401",
+    "name": "CBA Room 401",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM402",
+    "name": "CBA Room 402",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM403",
+    "name": "CBA Room 403",
+    "building": "St. Albertus Magnus"  },
+  {
+    "code": "ALM404",
+    "name": "CBA Room 404",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM405",
+    "name": "CBA Room 405",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Business Stimulation Office",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Conference Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Learning Resource Center",
+    "name": "Library",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Computer Laboratory",
+    "name": "Computer Laboratory",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Prefect of Student Formation and Activities",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CON Faculty Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "CON Chairperson Room",
+    "name": "Dean College of Nursing",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM201a",
+    "name": "Nursing Laboratory 1",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM201b",
+    "name": "Nursing Arts Lab 1",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM202a",
+    "name": "Nursing Laboratory 2",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM202b",
+    "name": "Nursing Arts Lab 2",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Anatomy Room",
+    "name": "Anatomy Room",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Student Affairs and Activities",
+    "name": "Student Affairs and Activities",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "COE Faculty Room",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "COE Chairperson Room",
+    "name": "COE Chairperson Room",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM101",
+    "name": "Micro-Teaching Laboratory",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM102",
+    "name": "COE Room 102",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM103",
+    "name": "COE Room 103",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM104",
+    "name": "COE Room 104",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "ALM105",
+    "name": "COE Room 105",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Flambeau Publications",
+    "name": "Flambeau Publications",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "Electrical Room",
+    "name": "Electrical Room",
+    "building": "St. Albertus Magnus"
+  },
+  {
+    "code": "St. Albertus Magnus Canteen",
+    "name": "",
+    "building": "St. Albertus Magnus"
+  },
+    {
+    "code": "STB101",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+    {
+    "code": "STB102",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+    {
+    "code": "STB103",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "Office of the Principal and Subject Area Coordinators",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "Office of the Dean",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "Office of the NSTP Coordinator",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB201",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+    {
+    "code": "STB202",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+    {
+    "code": "STB203",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB204",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB205",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB301",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "SHS and JHS Library",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB401",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB402",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB403",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB404",
+    "name": "Physical Science Laboratory",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB405",
+    "name": "Biological Science Laboratory",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB501",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB502",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB503",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB504",
+    "name": "AudioVisual Room",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB505",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "STB506",
+    "name": "",
+    "building": "St. Thomas Aquinas"
+  },
+  {
+    "code": "Casa Antonia-Training Hotel",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Nutrition Laboratory 1",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Sewing Room",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Wellness Room",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Nutrition Laboratory 2",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB201",
+    "name": "",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB202",
+    "name": "",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB203",
+    "name": "",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB204",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB205",
+    "name": "Grade School Computer lab",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB206",
+    "name": "High School Computer Lab",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB207",
+    "name": "",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB208",
+    "name": "",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB209",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB210",
+    "name": "Grade School Learning Resource Center / Library",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Grade School Prefect of Student Formation and Grade Level Leader",
+    "name": "",
+    "building": "St. Catherine"
+  },
+   {
+    "code": "SCB301",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB302",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB303",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB304",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB305",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB306",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB307",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB308",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB309",
+    "name": "Grade School Science Laboratory",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Mimeographing Room",
+    "name": "",
+    "building": "St. Catherine"
+  },
+    {
+    "code": "SCB401",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB402",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB403",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB404",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB405",
+    "name": "Speech Laboratory",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Math Faculty",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Principal's Office",
+    "name": "",
+    "building": "St. Catherine"
+  },
+    {
+    "code": "SCB501",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB502",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB503",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB504",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB505",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "SCB506",
+    "name": "",
+    "building": "St. Catherine"
+  },
+  {
+    "code": "Auditorium",
+    "name": "",
+    "building": "Mother Francisca Hall"
+  },
+  {
+    "code": "St. Dominic Canteen",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Mikrotik Training Cente",
+    "name": "r",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "IBED Student Council Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SCT Assessment Center",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SCT Archives",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "St. Rose of Lima Hall",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Computer Laboratory Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "College Computer Laboratory",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Accreditation Center",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "High School Computer Laboratory",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Office of the President",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Cyber Siena",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Finance Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Office of the Guidance Services",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Registrar's Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Admission and Marketing Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Catharsis Room",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Mindfulness Room",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Multipurpose Room",
+    "name": "Testing Room",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Instructional Media Center Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Grade School Learning Resource Center Library",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "CL VE Faculty",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Safety and Disaster Risk Management Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB201",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB202",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB203",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB311",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB312",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB313",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB314",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB315",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB316",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB317",
+    "name": "Professional Learning Community Room",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB318",
+    "name": "Exhibit Room",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB320",
+    "name": "Laboratory",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB321",
+    "name": "Integrated Science Laboratory",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB322",
+    "name": "Chemistry Laboratory",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB323",
+    "name": "Physics Laboratory",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Science Laboratory Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Reading Faculty",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "AP and Filipino Faculty",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "English Faculty",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "MAPEH Faculty",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Science Faculty",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "TLE/ICT Area",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB401",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB402",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB403",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB404",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB405",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB406",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB407",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB408",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB409",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB410",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB411",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB412",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB413",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB414",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB415",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB416",
+    "name": "Publication Office",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "High School Prefect of Student Formation Office",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "JLL Office",
+    "name": "Junior Level Leaders Office",
+    "building": "St. Dominic"
+  },
+   {
+    "code": "SDB501",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB502",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB503",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB504",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB505",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB506",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB507",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB511",
+    "name": "",
+    "building": "St. Dominic"
+  },
+    {
+    "code": "SDB512",
+    "name": "",
+    "building": "St. Dominic"
+  },
+     {
+    "code": "SDB513",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "SDB514",
+    "name": "",
+    "building": "St. Dominic"
+  },
+  {
+    "code": "Bar Laboratory",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Suite Royale",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "La Suite Principale de Serrano (Gintong Aral)",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Computeer Laboratory JACQUES",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "St. Vincent Ferrer Prayer Room",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Travel Management Office",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Pastry Kitchen 1",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Bill Shaw Cafe",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Salle de Conference Vibal 1",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Salle de Conference Vibal 2",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Hot Kitchen 1",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "General Store Room",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Commercial Kitchen",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "CIHM Faculty Office",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Practicum Office",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Fitness Room",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Pastry Kitchen 2",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Pastry Kitchen 3",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "General Stock Room",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Hot Kitchen 2",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Conference Hall 1",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Conference Hall 2",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Conference Hall 3",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "CIHM Chairperson's Office",
+    "name": "",
+    "building": "St. Jacques"
+  },
+   {
+    "code": "SJB301",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB302",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB303",
+    "name": "",
+    "building": "St. Jacques"
+  },
+     {
+    "code": "SJB304",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB305",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB306",
+    "name": "",
+    "building": "St. Jacques"
+    },
+  {
+    "code": "Big Hall 1",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Big Hall 2",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Big Hall 3",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Linen Room 1",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "M. Mistress Room",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "Laundry Area (Personnel only)",
+    "name": "",
+    "building": "St. Jacques"
+  },
+     {
+    "code": "SJB401",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB402",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB403",
+    "name": "",
+    "building": "St. Jacques"
+  },
+     {
+    "code": "SJB404",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB405",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB406",
+    "name": "",
+    "building": "St. Jacques"
+    },
+       {
+    "code": "SJB407",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB408",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB409",
+    "name": "",
+    "building": "St. Jacques"
+  },
+     {
+    "code": "SJB410",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB411",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB412",
+    "name": "",
+    "building": "St. Jacques"
+    },
+       {
+    "code": "SJB413",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB414",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB415",
+    "name": "",
+    "building": "St. Jacques"
+  },
+     {
+    "code": "SJB416",
+    "name": "",
+    "building": "St. Jacques"
+  },
+  {
+    "code": "SJB417",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB418",
+    "name": "",
+    "building": "St. Jacques"
+    },
+      {
+    "code": "SJB419",
+    "name": "",
+    "building": "St. Jacques"
+  },
+    {
+    "code": "SJB420",
+    "name": "",
+    "building": "St. Jacques"
+    },
+  {
+    "code": "Holy Rosary Canteen",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Campus Ministry Office",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Health Services",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Student Services Director Health Services Head",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Institutional Student Affairs and Activities ROSE",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Pantry",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "HRM and D Office",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Defense Room",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Research Development Center",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Chapel",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Sacristy 1",
+    "name": "",
+    "building": "St. Rose"
+  },
+  {
+    "code": "Playground",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Faculty Room",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Computer Laboratory - Kinder",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Room 101",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Room 102",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Mother Francisca Outreach Center",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Sewing Center",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Play Room",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Casa Sebastiana",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Room 201",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Room 202",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Room 202",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Room 204",
+    "name": "",
+    "building": "Mother Natividad"
+  },
+  {
+    "code": "Gym",
+    "name": "",
+    "building": "Gym"
+  },
+  {
+    "code": "Institutional Student Affairs and Activities GYM",
+    "name": "",
+    "building": "Gym"
+  },
+  {
+    "code":"POOL",
+    "name":"Swimming Pool",
+    "building":"St. Martin Sports Complex"
+  },
+  {
+    "code": "St. Martin Sports Complex",
+    "name": "",
+    "building": "St. Martin Sports Complex"
+  },
+    {
+    "code": "Gate 1",
+    "name": "",
+    "building": "Gate 1"
+  },
+  {
+    "code": "Gate 2",
+    "name": "",
+    "building": "Gate 2"
+  },
+  {
+    "code": "Gate 3",
+    "name": "",
+    "building": "Gate 3"
+  },
+  {
+    "code":"Gate 4",
+    "name":"",
+    "building":"Gate 4"
+  }
+
+
+]

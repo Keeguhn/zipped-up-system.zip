@@ -1,0 +1,256 @@
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
+    background:#fcf8e1
+}
+
+header {
+  padding: 1%;
+  color: #ffffff;
+  background: #8e0101;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  box-shadow: 3 2px 12px rgba(0, 0, 0, 0.2);    
+}
+header img {
+  position: relative;
+  left:0%;
+  width: 25%;
+  height: auto;
+ }
+#header-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  justify-content: space-between
+}
+
+#search {
+    width: 100%;
+    max-width: 40%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#search-results {
+  list-style: none;
+  margin-top: 0.25rem;
+  padding-left: 0.5rem;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #6c0101;
+  border-radius: 8px;
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  max-width: 40%;
+  left: 0.8%;
+  display: block;
+}
+#search-results li:hover {
+  background-color: #ff2c2c;
+}
+
+#zoom-wrapper {
+  overflow: hidden;
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#zoom-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+}
+#zoom-controls button {
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#map-container {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height:100%;
+  margin: 1rem auto;
+  overflow: hidden;
+  transform-origin: center center;
+  transition: transform 0.2s ease;
+}
+
+#campus-map {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.map-icon {
+    position: absolute;
+    width: 12%;
+    cursor: pointer;
+}
+.map-icon:hover {
+  filter: drop-shadow(0 0 6px rgb(255, 234, 0));
+  transform: scale(1.2);
+}
+
+/* Path finding related styles */
+.map-overlay#path-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  object-fit: contain;
+}
+
+#pathfinder-controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 300px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.pathfinder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background-color: #8e0101;
+  color: white;
+}
+
+.pathfinder-header h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.toggle-btn {
+  background-color: #ffffff;
+  color: #8e0101;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#pathfinder-panel {
+  padding: 15px;
+}
+
+.hidden {
+  display: none;
+}
+
+.point-selection {
+  margin-bottom: 15px;
+}
+
+.point-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.point-label {
+  font-weight: bold;
+  width: 30%;
+}
+
+.location-dropdown {
+  width: 70%;
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.select-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.select-btn.active {
+  background-color: #8e0101;
+  color: white;
+  border-color: #8e0101;
+}
+
+.path-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.action-btn {
+  background-color: #8e0101;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 15px;
+  cursor: pointer;
+  width: 48%;
+}
+
+.action-btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+#path-info {
+  background-color: #f5f5f5;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+#path-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;   /* match image scaling */
+  height: 100%;
+  pointer-events: none;
+}
+#path-info p {
+  margin: 5px 0;
+}
+
+.point-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 60;
+  border: 2px solid white;
+}
+
+.start-point {
+  background-color: #00cc00;
+}
+
+.end-point {
+  background-color: #cc0000;
+}

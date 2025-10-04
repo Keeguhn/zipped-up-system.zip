@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>360 Viewer</title>
+
+    <!-- Pannellum Library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.css">
+    <script src="https://cdn.jsdelivr.net/npm/pannellum/build/pannellum.js"></script>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black;
+        }
+        #panorama {
+            width: 100%;
+            height: 100%;
+        }
+        #back-btn {
+            position: absolute;
+            width:100px;
+            height: 50px;
+            bottom:1%;
+            left: 1%;
+            z-index: 10;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="back-btn" onclick="history.back()">← Back</button>
+    <div id="panorama"></div>
+
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const startRoom = params.get("room");
+
+    if (!startRoom) {
+        alert("No room code provided.");
+    } else {
+        fetch("data/rooms360.json")
+            .then(res => res.json())
+            .then(data => {
+                if (!data[startRoom]) {
+                    alert("Room not found in 360 data.");
+                    return;
+                }
+
+                // Convert our JSON into Pannellum's multi-scene format
+                let scenesConfig = {};
+                for (let room in data) {
+                    scenesConfig[room] = {
+                        type: "equirectangular",
+                        panorama: data[room].image,
+                        pitch: data[room].pitch || 0,
+                        yaw: data[room].yaw || 0,
+                        hotSpots: data[room].hotSpots || []
+                    };
+                }
+
+                pannellum.viewer('panorama', {
+                    default: {
+                        firstScene: startRoom,
+                        sceneFadeDuration: 1000,
+                        autoLoad: true
+                    },
+                    scenes: scenesConfig
+                });
+            })
+            .catch(err => {
+                console.error("Error loading rooms360.json:", err);
+            });
+    }
+</script>
+
+</body>
+</html>

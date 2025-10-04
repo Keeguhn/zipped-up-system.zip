@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>St. Jacques Building</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+        .floor-heading {
+            grid-column: 1/-1;
+            margin-top: 2.5rem;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+            font-weight: 800;
+            border-radius: 8px;
+            box-shadow: none;
+            padding: 0.6rem 1.2rem 0.6rem 1.5rem;
+            letter-spacing: 0.01em;
+            display: block;
+            width: 100%;
+        }
+    .floor-5 { color: #b71c1c; background: #fff4f4; border-left: 8px solid #b71c1c; }
+    .floor-4 { color: #b71c1c; background: #fff4f4; border-left: 8px solid #b71c1c; }
+    .floor-3 { color: #b71c1c; background: #f0f6ff; border-left: 8px solid #b71c1c; }
+    .floor-2 { color: #b71c1c; background: #fffbe7; border-left: 8px solid #b71c1c; }
+    .floor-ground { color: #b71c1c; background: #f8f4f1; border-left: 8px solid #b71c1c; }
+    .floor-basement { color: #b71c1c; background: #f3f0fa; border-left: 8px solid #b71c1c; }
+        body {
+            background: #f8f9fa;
+            margin: 0;
+            font-family: 'Poppins', 'Inter', Arial, sans-serif;
+            color: #222;
+        }
+        .building-header {
+            background: #fff;
+            padding: 2.5rem 0 1.5rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border-bottom: 1.5px solid #eee;
+            text-align: center;
+        }
+            .building-header h1 {
+                color: #b71c1c;
+                font-size: 2.3rem;
+                font-weight: 800;
+                margin: 0 0 0.5rem 0;
+                letter-spacing: 0.01em;
+            }
+        .building-header h3 {
+            color: #444;
+            font-size: 1.15rem;
+            font-weight: 400;
+            margin: 0 0 1.2rem 0;
+        }
+        .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            color: #888;
+            margin: 0 0 1.5rem 0;
+            padding-left: 1.5rem;
+        }
+            .breadcrumbs a {
+                color: #b71c1c;
+                text-decoration: none;
+                font-weight: 500;
+                transition: color 0.15s;
+            }
+            .breadcrumbs a:hover {
+                color: #d32f2f;
+                text-decoration: underline;
+            }
+            .back-btn {
+                display: inline-flex;
+                align-items: center;
+                border: 2px solid #b71c1c;
+                color: #b71c1c;
+                background: #fff;
+                border-radius: 6px;
+                padding: 0.4rem 1.1rem 0.4rem 0.8rem;
+                font-size: 1.05rem;
+                font-weight: 600;
+                text-decoration: none;
+                margin: 1.2rem 0 0 1.5rem;
+                transition: background 0.15s, color 0.15s, border 0.15s;
+                box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+            }
+            .back-btn:hover {
+                background: #b71c1c;
+                color: #fff;
+                border-color: #b71c1c;
+            }
+        .back-btn svg {
+            margin-right: 0.5rem;
+            width: 1.1em;
+            height: 1.1em;
+            vertical-align: middle;
+            fill: currentColor;
+        }
+        .room-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+            padding: 2.5rem 2rem 3rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .room-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: box-shadow 0.18s, transform 0.18s;
+            min-height: 320px;
+            position: relative;
+        }
+        .room-card:hover {
+            box-shadow: 0 6px 24px rgba(56,142,60,0.13);
+            transform: scale(1.025);
+            z-index: 2;
+        }
+            .room-title {
+                font-size: 1.35rem;
+                font-weight: 700;
+                color: #b71c1c;
+                margin-bottom: 0.3rem;
+                margin-top: 0;
+            }
+        .room-type {
+            font-size: 1.05rem;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 0.7rem;
+        }
+        .room-thumb {
+            width: 100%;
+            max-width: 260px;
+            border-radius: 8px;
+            margin-bottom: 1.1rem;
+            object-fit: cover;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+            align-self: center;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+            .start-tour-btn {
+                margin-top: auto;
+                background: #b71c1c;
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                padding: 0.7rem 1.4rem;
+                font-size: 1.08rem;
+                font-weight: 600;
+                cursor: pointer;
+                box-shadow: 0 1px 6px rgba(183,28,28,0.08);
+                transition: background 0.15s, box-shadow 0.15s;
+                text-decoration: none;
+                display: inline-block;
+            }
+            .start-tour-btn:hover {
+                background: #d32f2f;
+                box-shadow: 0 4px 16px rgba(183,28,28,0.13);
+            }
+        @media (max-width: 700px) {
+            .room-grid {
+                grid-template-columns: 1fr;
+                padding: 1.2rem 0.5rem 2rem 0.5rem;
+            }
+            .back-btn, .breadcrumbs {
+                padding-left: 0.5rem;
+                margin-left: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="building-header">
+        <a href="../index.html" class="back-btn">
+            <svg viewBox="0 0 20 20"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+            Back to Map
+        </a>
+        <h1>St. Jacques Building</h1>
+        <h3>This building contains various rooms and facilities. <br><i>Note: No 4th floor & Basement 360 data</i></h3>
+        <nav class="breadcrumbs">
+            <a href="../index.html">Map</a> &gt; <span>St. Jacques</span>
+        </nav>
+    </div>
+    <main>
+        <section class="room-grid">
+                    <h2 class="floor-heading floor-4" style="margin-top: 0;">4th Floor</h2>
+                    <div class="room-card" id="SJB401">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB401" alt="Preview of SJB401" />
+                        <h2 class="room-title">SJB401</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB401" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB402">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB402" alt="Preview of SJB402" />
+                        <h2 class="room-title">SJB402</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB402" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB403">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB403" alt="Preview of SJB403" />
+                        <h2 class="room-title">SJB403</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB403" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB404">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB404" alt="Preview of SJB404" />
+                        <h2 class="room-title">SJB404</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB404" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB405">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB405" alt="Preview of SJB405" />
+                        <h2 class="room-title">SJB405</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB405" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB406">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB406" alt="Preview of SJB406" />
+                        <h2 class="room-title">SJB406</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB406" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB407">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB407" alt="Preview of SJB407" />
+                        <h2 class="room-title">SJB407</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB407" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB408">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB408" alt="Preview of SJB408" />
+                        <h2 class="room-title">SJB408</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB408" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB409">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB409" alt="Preview of SJB409" />
+                        <h2 class="room-title">SJB409</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB409" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB410">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB410" alt="Preview of SJB410" />
+                        <h2 class="room-title">SJB410</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB410" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB411">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB411" alt="Preview of SJB411" />
+                        <h2 class="room-title">SJB411</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB411" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB412">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB412" alt="Preview of SJB412" />
+                        <h2 class="room-title">SJB412</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB412" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB413">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB413" alt="Preview of SJB413" />
+                        <h2 class="room-title">SJB413</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB413" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB414">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB414" alt="Preview of SJB414" />
+                        <h2 class="room-title">SJB414</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB414" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB415">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB415" alt="Preview of SJB415" />
+                        <h2 class="room-title">SJB415</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB415" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB416">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB416" alt="Preview of SJB416" />
+                        <h2 class="room-title">SJB416</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB416" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB417">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB417" alt="Preview of SJB417" />
+                        <h2 class="room-title">SJB417</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB417" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB418">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB418" alt="Preview of SJB418" />
+                        <h2 class="room-title">SJB418</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB418" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB419">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB419" alt="Preview of SJB419" />
+                        <h2 class="room-title">SJB419</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB419" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="SJB420">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB420" alt="Preview of SJB420" />
+                        <h2 class="room-title">SJB420</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=SJB420" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="LinenRoom1">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Linen+Room+1" alt="Preview of Linen Room 1" />
+                        <h2 class="room-title">Linen Room 1</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=Linen Room 1" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="MMistressRoom">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=M.+Mistress+Room" alt="Preview of M. Mistress Room" />
+                        <h2 class="room-title">M. Mistress Room</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=M. Mistress Room" class="start-tour-btn">Start Tour</a>
+                    </div>
+                    <div class="room-card" id="LaundryAreaPersonnelOnly">
+                        <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Laundry+Area+(Personnel+only)" alt="Preview of Laundry Area (Personnel only)" />
+                        <h2 class="room-title">Laundry Area (Personnel only)</h2>
+                        <div class="room-type">Room</div>
+                        <a href="../360-viewer.html?room=Laundry Area" class="start-tour-btn">Start Tour</a>
+                    </div>
+            <h2 class="floor-heading floor-3">3rd Floor</h2>
+            <div class="room-card" id="BigHall1">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Big+Hall+1" alt="Preview of Big Hall 1" />
+                <h2 class="room-title">Big Hall 1</h2>
+                <div class="room-type">Hall</div>
+                <a href="../360-viewer.html?room=Big Hall 1" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="BigHall2">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Big+Hall+2" alt="Preview of Big Hall 2" />
+                <h2 class="room-title">Big Hall 2</h2>
+                <div class="room-type">Hall</div>
+                <a href="../360-viewer.html?room=Big Hall 2" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="BigHall3">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Big+Hall+3" alt="Preview of Big Hall 3" />
+                <h2 class="room-title">Big Hall 3</h2>
+                <div class="room-type">Hall</div>
+                <a href="../360-viewer.html?room=Big Hall 3" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SJB301">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB301" alt="Preview of SJB301" />
+                <h2 class="room-title">SJB301</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SJB301" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SJB302">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB302" alt="Preview of SJB302" />
+                <h2 class="room-title">SJB302</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SJB302" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SJB303">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB303" alt="Preview of SJB303" />
+                <h2 class="room-title">SJB303</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SJB303" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SJB304">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB304" alt="Preview of SJB304" />
+                <h2 class="room-title">SJB304</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SJB304" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SJB305">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB305" alt="Preview of SJB305" />
+                <h2 class="room-title">SJB305</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SJB305" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SJB306">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=SJB306" alt="Preview of SJB306" />
+                <h2 class="room-title">SJB306</h2>
+                <div class="room-type">Room</div>
+                <a href="../360-viewer.html?room=SJB306" class="start-tour-btn">Start Tour</a>
+            </div>
+            <h2 class="floor-heading floor-2">2nd Floor</h2>
+            <div class="room-card" id="CIHMFacultyOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CIHM+Faculty+Office" alt="Preview of CIHM Faculty Office" />
+                <h2 class="room-title">CIHM Faculty Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=CIHM Chairperson's Office" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="PracticumOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Practicum+Office" alt="Preview of Practicum Office" />
+                <h2 class="room-title">Practicum Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=PracticumOffice" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="PastryKitchen2">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Pastry+Kitchen+2" alt="Preview of Pastry Kitchen 2" />
+                <h2 class="room-title">Pastry Kitchen 2</h2>
+                <div class="room-type">Kitchen</div>
+                <a href="../360-viewer.html?room=Pastry Kitchen 2" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="PastryKitchen3">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Pastry+Kitchen+3" alt="Preview of Pastry Kitchen 3" />
+                <h2 class="room-title">Pastry Kitchen 3</h2>
+                <div class="room-type">Kitchen</div>
+                <a href="../360-viewer.html?room=Pastry Kitchen 3" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="GeneralStockRoom">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=General+Stock+Room" alt="Preview of General Stock Room" />
+                <h2 class="room-title">General Stock Room</h2>
+                <div class="room-type">Stock Room</div>
+                <a href="../360-viewer.html?room=General Stock Room" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="HotKitchen2">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Hot+Kitchen+2" alt="Preview of Hot Kitchen 2" />
+                <h2 class="room-title">Hot Kitchen 2</h2>
+                <div class="room-type">Kitchen</div>
+                <a href="../360-viewer.html?room=Hot Kitchen 2" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="ConferenceHall1">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Conference+Hall+1" alt="Preview of Conference Hall 1" />
+                <h2 class="room-title">Conference Hall 1</h2>
+                <div class="room-type">Conference Hall</div>
+                <a href="../360-viewer.html?room=Conference Hall 1" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="ConferenceHall2">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Conference+Hall+2" alt="Preview of Conference Hall 2" />
+                <h2 class="room-title">Conference Hall 2</h2>
+                <div class="room-type">Conference Hall</div>
+                <a href="../360-viewer.html?room=Conference Hall 2" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="ConferenceHall3">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Conference+Hall+3" alt="Preview of Conference Hall 3" />
+                <h2 class="room-title">Conference Hall 3</h2>
+                <div class="room-type">Conference Hall</div>
+                <a href="../360-viewer.html?room=Conference Hall 3" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="CIHMChairpersonOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=CIHM+Chairperson's+Office" alt="Preview of CIHM Chairperson's Office" />
+                <h2 class="room-title">CIHM Chairperson's Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=CIHM Chairperson's Office" class="start-tour-btn">Start Tour</a>
+            </div>
+            <h2 class="floor-heading floor-ground">Ground Floor</h2>
+            <div class="room-card" id="PastryKitchen">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Pastry+Kitchen" alt="Preview of Pastry Kitchen" />
+                <h2 class="room-title">Pastry Kitchen</h2>
+                <div class="room-type">Kitchen</div>
+                <a href="../360-viewer.html?room=Pastry Kitchen 1" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="BillShawCafe">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Bill+Shaw+Cafe" alt="Preview of Bill Shaw Cafe" />
+                <h2 class="room-title">Bill Shaw Cafe</h2>
+                <div class="room-type">Cafe</div>
+                <a href="../360-viewer.html?room=Bill Shaw Cafe" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SalleDeConferenceVibal1">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Salle+de+Conference+Vibal+%231" alt="Preview of Salle de Conference Vibal #1" />
+                <h2 class="room-title">Salle de Conference Vibal #1</h2>
+                <div class="room-type">Conference Room</div>
+                <a href="../360-viewer.html?room=Salle de Conference Vibal 1" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SalleDeConferenceVibal2">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Salle+de+Conference+Vibal+%232" alt="Preview of Salle de Conference Vibal #2" />
+                <h2 class="room-title">Salle de Conference Vibal #2</h2>
+                <div class="room-type">Conference Room</div>
+                <a href="../360-viewer.html?room=Salle de Conference Vibal 2" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="HotKitchen1">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Hot+Kitchen+1" alt="Preview of Hot Kitchen 1" />
+                <h2 class="room-title">Hot Kitchen 1</h2>
+                <div class="room-type">Kitchen</div>
+                <a href="../360-viewer.html?room=Hot Kitchen 1" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="GeneralStoreRoom">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=General+Store+Room" alt="Preview of General Store Room" />
+                <h2 class="room-title">General Store Room</h2>
+                <div class="room-type">Store Room</div>
+                <a href="../360-viewer.html?room=General Store Room" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="CommercialKitchen">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Commrcial+Kitchen" alt="Preview of Commrcial Kitchen" />
+                <h2 class="room-title">Commercial Kitchen</h2>
+                <div class="room-type">Kitchen</div>
+                <a href="../360-viewer.html?room=Commercial Kitchen" class="start-tour-btn">Start Tour</a>
+            </div>
+            <h2 class="floor-heading floor-basement">Basement</h2>
+            <div class="room-card" id="BarLaboratory">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Bar+Laboratory" alt="Preview of Bar Laboratory" />
+                <h2 class="room-title">Bar Laboratory</h2>
+                <div class="room-type">Laboratory</div>
+                <a href="../360-viewer.html?room=Bar Laboratory" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="SuiteRoyale">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Suite+Royale" alt="Preview of Suite Royale" />
+                <h2 class="room-title">Suite Royale</h2>
+                <div class="room-type">Suite</div>
+                <a href="../360-viewer.html?room=Suite Royale" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="LaSuitePrincipaleDeSerrano">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=La+Suite+Principale+de+Serrano" alt="Preview of La Suite Principale de Serrano (Gintong Aral)" />
+                <h2 class="room-title">La Suite Principale de Serrano (Gintong Aral)</h2>
+                <div class="room-type">Suite</div>
+                <a href="../360-viewer.html?room=La Suite Principale de Serrano (Gintong Aral)" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="ComputerLaboratory">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Computeer+Laboratory" alt="Preview of Computeer Laboratory" />
+                <h2 class="room-title">Computer Laboratory</h2>
+                <div class="room-type">Laboratory</div>
+                <a href="../360-viewer.html?room=Computeer Laboratory JACQUES" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="StVincentFerrerPrayerRoom">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=St.+Vincent+Ferrer+prayer+Room" alt="Preview of St. Vincent Ferrer prayer Room" />
+                <h2 class="room-title">St. Vincent Ferrer prayer Room</h2>
+                <div class="room-type">Prayer Room</div>
+                <a href="../360-viewer.html?room=St. Vincent Ferrer Prayer Room" class="start-tour-btn">Start Tour</a>
+            </div>
+            <div class="room-card" id="TravelManagementOffice">
+                <img class="room-thumb" src="https://via.placeholder.com/320x140?text=Travel+Management+Office" alt="Preview of Travel Management Office" />
+                <h2 class="room-title">Travel Management Office</h2>
+                <div class="room-type">Office</div>
+                <a href="../360-viewer.html?room=Travel Management Office" class="start-tour-btn">Start Tour</a>
+            </div>
+    </section>
+        <div style="display: flex; justify-content: center; margin: 2.5rem 0 3.5rem 0;">
+            <a href="../index.html" class="back-btn" style="font-size: 1.15rem; padding: 0.7rem 2.2rem;">
+                <svg viewBox="0 0 20 20" style="margin-right: 0.7rem; width: 1.2em; height: 1.2em; vertical-align: middle; fill: currentColor;"><path d="M12.7 15.3a1 1 0 0 1-1.4 0l-5-5a1 1 0 0 1 0-1.4l5-5a1 1 0 1 1 1.4 1.4L8.42 9H17a1 1 0 1 1 0 2H8.42l4.3 4.3a1 1 0 0 1 0 1.4z"/></svg>
+                Back to Map
+            </a>
+        </div>
+    </main>
+    <script>
+        // Scroll to hash on page load
+        const hash = window.location.hash.replace("#", "");
+        if (hash) {
+            const target = document.getElementById(hash);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "start" });
+                target.style.boxShadow = "0 0 0 4px #ffd600";
+            }
+        }
+    </script>
+</body>
+</html>
+
